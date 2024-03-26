@@ -1,9 +1,51 @@
-const { register, login } = require('../services/userService');
+const { register, login, getAllUsers, toggleConnectionById, deleteProfile, getUserById } = require('../services/userService');
 const { errorParser } = require('../utils/errorParser');
 
-const authController = require('express').Router();
+const userController = require('express').Router();
 
-authController.post('/register', async (req, res) => {
+// handlers that are not included in the authentication logic
+userController.get('/', async (req, res) => {
+    try {
+        const users = await getAllUsers();
+        res.status(200).json(users);
+    } catch (err) {
+        const errors = errorParser(err);
+        res.status(400).json({ errors });
+    }
+});
+
+userController.get('/details/:id', async (req, res) => {
+    try {
+        const response = await getUserById(req.params.id);
+        res.status(200).json(response);
+    } catch (err) {
+        const errors = errorParser(err);
+        res.status(400).json({ errors });
+    }
+});
+
+userController.delete('/del/:id', async (req, res) => {
+    try {
+        const response = await deleteProfile(req.params.id);
+        res.status(200).json(response);
+    } catch (err) {
+        const errors = errorParser(err);
+        res.status(400).json({ errors });
+    }
+});
+
+userController.post('/connect/:id', async (req, res) => {
+    try {
+        const response = await toggleConnectionById(req.params.id);
+        res.status(200).json(response);
+    } catch (err) {
+        const errors = errorParser(err);
+        res.status(400).json({ errors });
+    }
+});
+
+// authentication
+userController.post('/register', async (req, res) => {
     try {
         registerDto(req);
         const user = await register(req.body.email, req.body.password, req.body.firstName, req.body.lastName);
@@ -14,7 +56,7 @@ authController.post('/register', async (req, res) => {
     }
 });
 
-authController.post('/login', async (req, res) => {
+userController.post('/login', async (req, res) => {
     try {
         loginDto(req);
         const user = await login(req.body.email, req.body.password);
@@ -25,7 +67,7 @@ authController.post('/login', async (req, res) => {
     }
 });
 
-module.exports = authController;
+module.exports = userController;
 
 function registerDto(req) {
     if(req.body.email == '' 

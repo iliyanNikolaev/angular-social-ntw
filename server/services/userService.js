@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const jwtSecret = 'ab89abf0-198b-473d-9a8a-8bc05af58e0d';
 const User = require('../models/User');
-
+// auth
 async function register(email, password, firstName, lastName) {
     const existing = await User.findOne({ email });
     if (existing) {
@@ -57,8 +57,30 @@ function createSession({ _id, email, profilePicture, firstName, lastName }) {
     return token;
 }
 
+// others
+async function getAllUsers() {
+    return ["all users or error"]
+}
+
+async function getUserById(id) {
+    return ["user or error"]
+}
+
+async function toggleConnectionById(id) {
+    return ["ok or error"]
+}
+
+async function deleteProfile(id) {
+    return ["ok or error"]
+}
+
+
 module.exports = {
     register,
     login,
-    verifyToken
+    verifyToken,
+    getAllUsers,
+    toggleConnectionById,
+    deleteProfile,
+    getUserById
 }
