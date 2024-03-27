@@ -59,21 +59,63 @@ function createSession({ _id, email, profilePicture, firstName, lastName }) {
 
 // others
 async function getAllUsers() {
-    return ["all users or error"]
+    const users = await User.find({})
+        .select(['_id', 'firstName', 'lastName', 'profilePic'])
+    return users;
 }
 
 async function getUserById(id) {
-    return ["user or error"]
+    const user = await User.findById(id)
+        .select(['_id', 'firstName', 'lastName', 'profilePic', 'posts', 'connections'])
+        .populate('posts')
+        .populate('connections')
+        .select(['_id', 'firstName', 'lastName', 'profilePic'])
+    return user;
 }
 
-async function toggleConnectionById(id) {
-    return ["ok or error"]
+async function toggleConnectionById(targetUserId, reqId) {
+    const reqUser = await User.findById(reqId);
+    let response1 = [];
+    let response2 = [];
+    if(reqUser.connections.includes(targetUserId)) {
+        response1 = await User.updateOne(
+            { _id: targetUserId },
+            { $pull: { connections: reqId }});
+        
+        response2 = await User.updateOne(
+            { _id: reqId },
+            { $pull: { connections: targetUserId }});
+    } else {
+        response1 = await User.updateOne(
+            { _id: targetUserId },
+            { $push: { connections: reqId }});
+        
+        response2 = await User.updateOne(
+            { _id: reqId },
+            { $push: { connections: targetUserId }});
+    }
+    
+    return [response1, response2];
 }
 
 async function deleteProfile(id) {
-    return ["ok or error"]
+    const response = await User.findByIdAndDelete(id);
+    return response;
 }
 
+async function editUser(id, userData) {
+    if(userData.profilePic != '') {
+        await User.findByIdAndUpdate(id, userData);
+    } else {
+        await User.findByIdAndUpdate(id, {
+            email: userData.email,
+            firstName: userData.firstName,
+            lastName: userData.lastName
+        });
+    }
+    const edited = await getUserById(id);
+    return edited;
+}
 
 module.exports = {
     register,
@@ -82,5 +124,6 @@ module.exports = {
     getAllUsers,
     toggleConnectionById,
     deleteProfile,
-    getUserById
+    getUserById,
+    editUser
 }
