@@ -6,7 +6,7 @@ const postController = require('express').Router();
 postController.get('/', async (req, res) => {
     try {
         const posts = await getLastPosts();
-        res.status(200).json(users);
+        res.status(200).json(posts);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
@@ -23,8 +23,8 @@ postController.get('/byUser/:userId', async (req, res) => {
 });
 postController.post('/like/:id', async (req, res) => {
     try {
-        const posts = await toggleLikeByPostId(req.params.id);
-        res.status(200).json(posts);
+        const post = await toggleLikeByPostId(req.params.id);
+        res.status(200).json(post);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
@@ -33,8 +33,8 @@ postController.post('/like/:id', async (req, res) => {
 postController.post('/create', async (req, res) => {
     try {
         // createPostDto
-        const posts = await createPost(req.body);
-        res.status(200).json(posts);
+        const post = await createPost(req.body);
+        res.status(200).json(post);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
@@ -42,9 +42,9 @@ postController.post('/create', async (req, res) => {
 });
 postController.put('/edit/:id', async (req, res) => {
     try {
-        // createPostDto
-        const posts = await editPostById(req.params.id);
-        res.status(200).json(posts);
+        // editPostDto
+        const post = await editPostById(req.params.id);
+        res.status(200).json(post);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
@@ -53,8 +53,8 @@ postController.put('/edit/:id', async (req, res) => {
 postController.delete('/delete/:id', async (req, res) => {
     try {
         // createPostDto
-        const posts = await deletePostById(req.params.id);
-        res.status(200).json(posts);
+        const response = await deletePostById(req.params.id);
+        res.status(200).json(response);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });

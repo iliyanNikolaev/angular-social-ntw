@@ -24,7 +24,7 @@ userController.get('/details/:id', async (req, res) => {
     }
 });
 
-userController.delete('/del/:id', async (req, res) => {
+userController.delete('/delete/:id', async (req, res) => {
     try {
         const response = await deleteProfile(req.params.id);
         res.status(200).json(response);

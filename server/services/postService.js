@@ -5,7 +5,7 @@ async function getLastPosts() {
 }
 
 async function getLastPostsByUserId(id) {
-    return ["last 5 posts or error"]
+    return ["last 5 posts with populated comments and owner or error"]
 }
 async function toggleLikeByPostId(id) {
     return ["ok or error"]
