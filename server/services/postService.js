@@ -5,7 +5,7 @@ async function getLastPosts(skip) {
     const posts = await Post.find()
         .sort({ createdAt: -1 })
         .skip(skip)
-        .limit(3)
+        .limit(5)
         .populate({
             path: 'likes',
             select: '_id firstName lastName profilePic'

@@ -1,19 +1,31 @@
+const { Types }= require('mongoose');
 const Comment = require('../models/Comment');
+const Post = require('../models/Post');
 
 async function createComment(commentData) {
-    return ["created comment or error"]
+    if (!Types.ObjectId.isValid(commentData.postId)) {
+        throw new Error('Invalid postId');
+    }
+    const comment = await Comment.create(commentData);
+    await Post.updateOne(
+        { _id: commentData.postId },
+        { $push: { comments: comment._id } });
+    return comment;
 }
 
-async function editCommentById(id) {
-    return ["edited comment or error"]
-}
-
-async function deleteCommentById(id) {
-    return ["deleted comment or error"]
+async function deleteCommentById(id, reqUserId) {
+    const currentComment = await Comment.findById(id);
+    if(currentComment.owner != reqUserId){
+        throw new Error('Only owner can delete comment');
+    }
+    const response = await Comment.findByIdAndDelete(id);
+    await Post.updateOne(
+        { _id: currentComment.postId },
+        { $pull: { comments: id } });
+    return response;
 }
 
 module.exports = {
     createComment,
-    editCommentById,
     deleteCommentById
 }
