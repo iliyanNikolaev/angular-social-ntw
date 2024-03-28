@@ -2,7 +2,7 @@ const { verifyToken } = require("../services/userService");
 
 function session() {
     return function (req, res, next) {
-        const token = req.body.token;
+        const token = req.headers.token;
         if (token) {
             try {
                 const userData = verifyToken(token);
