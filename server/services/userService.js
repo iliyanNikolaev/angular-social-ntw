@@ -67,9 +67,14 @@ async function getAllUsers() {
 async function getUserById(id) {
     const user = await User.findById(id)
         .select(['_id', 'firstName', 'lastName', 'profilePic', 'posts', 'connections'])
-        .populate('posts')
-        .populate('connections')
-        .select(['_id', 'firstName', 'lastName', 'profilePic'])
+        .populate({
+            path: 'posts',
+            options: { sort: { createdAt: -1 }, limit: 3 }
+        })
+        .populate({
+            path: 'connections',
+            select: '_id firstName lastName profilePic'
+        })
     return user;
 }
 
@@ -77,24 +82,24 @@ async function toggleConnectionById(targetUserId, reqId) {
     const reqUser = await User.findById(reqId);
     let response1 = [];
     let response2 = [];
-    if(reqUser.connections.includes(targetUserId)) {
+    if (reqUser.connections.includes(targetUserId)) {
         response1 = await User.updateOne(
             { _id: targetUserId },
-            { $pull: { connections: reqId }});
-        
+            { $pull: { connections: reqId } });
+
         response2 = await User.updateOne(
             { _id: reqId },
-            { $pull: { connections: targetUserId }});
+            { $pull: { connections: targetUserId } });
     } else {
         response1 = await User.updateOne(
             { _id: targetUserId },
-            { $push: { connections: reqId }});
-        
+            { $push: { connections: reqId } });
+
         response2 = await User.updateOne(
             { _id: reqId },
-            { $push: { connections: targetUserId }});
+            { $push: { connections: targetUserId } });
     }
-    
+
     return [response1, response2];
 }
 
@@ -104,7 +109,7 @@ async function deleteProfile(id) {
 }
 
 async function editUser(id, userData) {
-    if(userData.profilePic != '') {
+    if (userData.profilePic != '') {
         await User.findByIdAndUpdate(id, userData);
     } else {
         await User.findByIdAndUpdate(id, {

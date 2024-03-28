@@ -1,11 +1,16 @@
-const { getLastPosts, getLastPostsByUserId, toggleLikeByPostId, createPost, editPostById, deletePostById } = require('../services/postService');
+const { getLastPosts, getLastPostsByUserId, toggleLikeByPostId, createPost, editPostById, deletePostById, getPostById } = require('../services/postService');
+const { hasUser } = require('../middlewares/guards');
 const { errorParser } = require('../utils/errorParser');
 
 const postController = require('express').Router();
 
 postController.get('/', async (req, res) => {
+    let skip = 0;
+    if(req.query.skip && !isNaN(Number(req.query.skip))) {
+        skip = Number(req.query.skip);
+    }
     try {
-        const posts = await getLastPosts();
+        const posts = await getLastPosts(skip);
         res.status(200).json(posts);
     } catch (err) {
         const errors = errorParser(err);
@@ -13,47 +18,68 @@ postController.get('/', async (req, res) => {
     }
 });
 postController.get('/byUser/:userId', async (req, res) => {
+    let skip = 0;
+    if(req.query.skip && !isNaN(Number(req.query.skip))) {
+        skip = Number(req.query.skip);
+    }
     try {
-        const posts = await getLastPostsByUserId(req.params.userId);
+        const posts = await getLastPostsByUserId(skip, req.params.userId);
         res.status(200).json(posts);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
     }
 });
-postController.post('/like/:id', async (req, res) => {
+postController.get('/details/:postId', async (req, res) => {
     try {
-        const post = await toggleLikeByPostId(req.params.id);
+        const post = await getPostById(req.params.postId);
         res.status(200).json(post);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
     }
 });
-postController.post('/create', async (req, res) => {
+postController.post('/like/:id', hasUser, async (req, res) => {
     try {
-        // createPostDto
-        const post = await createPost(req.body);
+        const post = await toggleLikeByPostId(req.params.id, req.userData._id);
         res.status(200).json(post);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
     }
 });
-postController.put('/edit/:id', async (req, res) => {
+postController.post('/create', hasUser, async (req, res) => {
     try {
-        // editPostDto
-        const post = await editPostById(req.params.id);
+        const reqId = req.userData._id
+        createPostDto(req);
+        const post = await createPost({ ...req.body, owner: reqId });
         res.status(200).json(post);
     } catch (err) {
         const errors = errorParser(err);
         res.status(400).json({ errors });
     }
 });
-postController.delete('/delete/:id', async (req, res) => {
+postController.put('/edit/:id', hasUser, async (req, res) => {
     try {
-        // createPostDto
-        const response = await deletePostById(req.params.id);
+        const currentPost = await getPostById(req.params.id);
+        if(currentPost.owner._id != req.userData._id) {
+            throw new Error('Only owner can edit a post!');
+        }
+        editPostDto(req);
+        const post = await editPostById(req.params.id, req.body);
+        res.status(200).json(post);
+    } catch (err) {
+        const errors = errorParser(err);
+        res.status(400).json({ errors });
+    }
+});
+postController.delete('/delete/:id', hasUser, async (req, res) => {
+    try {
+        const currentPost = await getPostById(req.params.id);
+        if(currentPost.owner._id != req.userData._id) {
+            throw new Error('Only owner can delete a post!');
+        }
+        const response = await deletePostById(req.params.id, req.userData._id);
         res.status(200).json(response);
     } catch (err) {
         const errors = errorParser(err);
@@ -61,3 +87,21 @@ postController.delete('/delete/:id', async (req, res) => {
     }
 });
 module.exports = postController;
+function createPostDto(req) {
+    if(req.body.textContent == '' || req.body.textContent.length < 3 || req.body.textContent.length > 70){
+        throw new Error('Post must have text content between 3 and 70 characters!')
+    }
+}
+function editPostDto(req) {
+    if(req.body.textContent) {
+        if(req.body.textContent == '' || req.body.textContent.length < 3 || req.body.textContent.length > 70){
+            throw new Error('Post must have text content between 3 and 70 characters!')
+        }
+    }
+    if(req.body.picture){
+        const pattern = /^https:\/\/res\.cloudinary\.com\//;
+        if(!pattern.test(req.body.picture)){
+            throw new Error('Invalid image');
+        }
+    }
+}
