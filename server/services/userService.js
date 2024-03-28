@@ -69,7 +69,21 @@ async function getUserById(id) {
         .select(['_id', 'firstName', 'lastName', 'profilePic', 'posts', 'connections'])
         .populate({
             path: 'posts',
-            options: { sort: { createdAt: -1 }, limit: 3 }
+            options: { sort: { createdAt: -1 }, limit: 3 },
+            populate: [
+                {
+                    path: 'likes',
+                    select: '_id firstName lastName profilePic'
+                },
+                {
+                    path: 'comments',
+                    select: 'textContent owner',
+                    populate: {
+                        path: 'owner',
+                        select: '_id firstName lastName profilePic'
+                    }
+                }
+            ]
         })
         .populate({
             path: 'connections',
