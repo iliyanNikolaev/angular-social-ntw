@@ -1,0 +1,47 @@
+@import url("../page-layout.css");
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    gap: 4rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 0.35rem;
+    color: white;
+    background-color: #13274F;
+    padding: 0.4rem;
+    font-size: small;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.loginText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+    color: #13274F;
+    margin-bottom: 1.5rem;
+}
+
+.loginText:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.loginIcon {
+    color: #13274F;
+    font-size: xx-large;
+}

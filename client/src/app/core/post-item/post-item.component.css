@@ -1,0 +1,137 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #13274F;
+    padding: 0.5rem;
+    width: 95%;
+}
+
+.upper{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.author{
+    display: flex;
+    flex-direction: column;
+}
+
+.fullName{
+    font-weight: bold;
+    text-decoration: none;
+    color: darkblue;    
+}
+
+.fullName:hover{
+    scale: 1.05;
+}
+
+.time{
+    font-style: italic;
+}
+
+.avatar{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.postImg{
+    width: 80%;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 3px solid #13274F;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.lower{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.controls{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.actions{
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+}
+
+.likeBtn{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.likeBtn:hover{
+    cursor: pointer;
+    scale: 0.9;
+}
+
+.likeIcon{
+    color: #13274F;
+}
+
+.details{
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewLikesBtn:hover,
+.viewCommentsBtn:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        width: 100%;
+    }
+    .postImg{
+        height: 24rem;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .container {
+        width: 98%;
+    }
+    .postImg{
+        height: 22rem;
+        width: 95%;
+    }
+}
+
+
+/* phones */
+@media only screen and (max-width: 600px) {
+    .postImg{
+        height: 16rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .postImg{
+        width: 100%;
+        height: 14rem;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .postImg{
+        width: 95%;
+        height: 11rem;
+    }
+}

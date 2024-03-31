@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="container">
+        
+        <div class="notLogged">
+            <a routerLink='/login' class="loginText">
+                <i class="fas fa-sign-in-alt loginIcon"></i>
+                Login here
+            </a>
+        </div>
+
+        <app-create-post />
+
+        <app-post-list />
+
+        <div class="controls">
+            <button class="btn">
+                <i class="fas fa-angle-double-left"></i> Prev
+            </button>
+            <button class="btn">
+                Next <i class="fas fa-angle-double-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
