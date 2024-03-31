@@ -1,0 +1,64 @@
+@import url("../page-layout.css");
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading {
+    color: #13274F;
+    margin-bottom: 2rem;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #13274F;
+    font-size: large;
+    border-bottom: 1px solid #13274F;
+    border-radius: 0.2rem;
+    padding-left: 2.1rem;
+    padding-bottom: 0.1rem;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    left: 0.5rem;
+    bottom: 0.2rem;
+    color: #13274F;
+    font-size: large;
+}
+
+.btn {
+    border: none;
+    border-radius: 0.35rem;
+    color: white;
+    background-color: #13274F;
+    padding: 0.4rem;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.redirect {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.link {
+    text-decoration: none;
+    color: #13274F;
+    font-weight: bold;
+}
