@@ -1,0 +1,51 @@
+@import url("../page-layout.css");
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.heading {
+    color: #13274F;
+}
+
+.userContainer {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username{
+    font-weight: bold;
+}
+
+.input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #13274F;
+    font-size: large;
+    border-bottom: 1px solid #13274F;
+    margin-bottom: .5rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 0.35rem;
+    color: white;
+    background-color: #13274F;
+    padding: 0.4rem;
+    font-size: medium;
+    cursor: pointer;
+}
