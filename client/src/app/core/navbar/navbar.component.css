@@ -1,0 +1,113 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.2rem;
+    margin-bottom: 0.4rem;
+    position: sticky;
+    top: 0.2rem;
+    z-index: 1;
+}
+
+.container {
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2rem;
+    background-color: #ffffff52;
+    box-shadow: 0 10px 15px rgb(0 0 0 / 15%);
+    width: calc(100% - 4rem);
+    color: rgba(0, 0, 0, 0.8);
+    /* glass effect */
+    backdrop-filter: blur(15px);
+    background-blend-mode: overlay;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.logo {
+    color: #13274F;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.icons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.homeIcon,
+.profileIcon,
+.logoIcon,
+.usersIcon,
+.logoutIcon {
+    color: #13274F;
+    font-size: xx-large;
+}
+
+.homeIcon:hover,
+.profileIcon:hover,
+.logoIcon:hover,
+.usersIcon:hover,
+.logoutIcon:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+/* Custom (phones, 374px and down) */
+@media only screen and (max-width: 374px) {
+    .container {
+        width: 85%;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+    .logo {
+        font-size: large;
+    }
+
+    .homeIcon,
+    .profileIcon,
+    .logoIcon,
+    .usersIcon,
+    .logoutIcon {
+        font-size: x-large;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 92%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 89%;
+    }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 87%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .container {
+        width: 85%;
+    }
+}
