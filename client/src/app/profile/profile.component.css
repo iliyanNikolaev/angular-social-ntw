@@ -1,0 +1,236 @@
+@import url("../page-layout.css");
+
+.upper {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.editIconContainer{
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editIcon{
+    color: white;
+    font-size: large;
+    width: 2rem;
+    height: 2rem;
+}
+
+.editIcon:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.cover {
+    width: 100%;
+    height: 10rem;
+    border-radius: 1rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 3px solid #13274F;
+}
+
+.avatar {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    border: 2px solid white;
+    bottom: -2rem;
+    left: 2rem;
+}
+
+.fullName {
+    position: absolute;
+    bottom: 0.4rem;
+    left: 11rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bolder;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    font-size: x-large;
+}
+
+.controls {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #13274F;
+    border-radius: 0.1rem;
+    padding-bottom: 1rem;
+}
+
+.connectionsBtn:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn {
+    border: none;
+    border-radius: 0.35rem;
+    color: white;
+    background-color: #13274F;
+    padding: 0.4rem;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.controlsPagination {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.btnPagination {
+    border: none;
+    border-radius: 0.35rem;
+    color: white;
+    background-color: #13274F;
+    padding: 0.4rem;
+    font-size: small;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .cover{
+        height: 18rem;
+    }
+
+    .fullName {
+        font-size: xx-large;
+        padding: 0.3rem;
+        left: 16rem;
+        bottom: 0.7rem;
+    }
+
+    .avatar {
+        width: 14rem;
+        height: 14rem;
+        left: 1rem;
+        bottom: -3rem;
+    }
+}
+
+/* phones */
+@media only screen and (max-width: 600px) {
+    .fullName {
+        font-size: large;
+        left: 9rem;
+        bottom: 0.8rem;
+    }
+
+    .avatar {
+        width: 8rem;
+        height: 8rem;
+        left: 0.8rem;
+        bottom: -1rem;
+    }
+
+    .controls {
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.3rem;
+    }
+    .editIconContainer{
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .editIcon{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .fullName {
+        font-size: large;
+        padding: 0.3rem;
+        left: 8rem;
+        bottom: 0.5rem;
+    }
+
+    .avatar {
+        width: 7rem;
+        height: 7rem;
+        left: 0.5rem;
+        bottom: -1rem;
+    }
+
+    .controls {
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.3rem;
+    }
+    .editIconContainer{
+        top: 1.2rem;
+        right: 1.2rem;
+    }
+    
+    .editIcon{
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 322px) {
+    .fullName {
+        font-size: small;
+        left: 6.5rem;
+        bottom: 0.5rem;
+    }
+
+    .avatar {
+        width: 6rem;
+        height: 6rem;
+        left: 0.4rem;
+        bottom: -1rem;
+    }
+
+    .lower {
+        margin-top: 1.5rem;
+    }
+    .editIconContainer{
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .editIcon{
+        width: 1rem;
+        height: 1rem;
+    }
+}
