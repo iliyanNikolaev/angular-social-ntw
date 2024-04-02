@@ -1,14 +1,14 @@
 <div class="wrapper" appScroll>
     <div class="container">
 
-        <div class="notLogged">
+        <div class="notLogged" *ngIf="!authData">
             <a routerLink='/login' class="loginText">
                 <i class="fas fa-sign-in-alt loginIcon"></i>
                 Login here
             </a>
         </div>
 
-        <app-create-post />
+        <app-create-post *ngIf="authData"/>
 
 
         <app-spinner *ngIf="postListLoading" />

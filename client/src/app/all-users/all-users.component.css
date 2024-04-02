@@ -26,8 +26,19 @@
     object-fit: cover;
 }
 
-.username{
+.username, .connectIcon{
     font-weight: bold;
+    color: darkblue;    
+}
+
+.username:hover, .connectIcon:hover{
+    scale: 1.05;
+    cursor: pointer;
+}
+
+.connectIcon:hover{
+    scale: 1.05;
+    cursor: pointer;
 }
 
 .input{

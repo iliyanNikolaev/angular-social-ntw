@@ -12,8 +12,8 @@
             <a routerLink="/home"><i class="fas fa-home homeIcon"></i></a>
             <a routerLink="/users"><i class="fas fa-users profileIcon"></i></a>
 
-            <a *ngIf="authData" routerLink="/profile/1"><i class="fas fa-user-circle usersIcon"></i></a>
-            <a *ngIf="authData" routerLink="/logout"><i class="fas fa-sign-out-alt logoutIcon"></i></a>
+            <a *ngIf="authData" routerLink="/profile/{{authData._id}}"><i class="fas fa-user-circle usersIcon"></i></a>
+            <a *ngIf="authData" (click)="logout()"><i class="fas fa-sign-out-alt logoutIcon"></i></a>
         </div>
     </div>
 </div>

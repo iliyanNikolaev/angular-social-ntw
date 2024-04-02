@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '../types/User';
 
@@ -8,20 +9,27 @@ import { User } from '../types/User';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   userId: string = '';
   user: User = { _id: '', firstName: '', lastName: '', connections: [], posts: [], profilePic: '' };
   profileLoading: boolean = true;
+  private routeParamsSubscription: Subscription = new Subscription();
+  private getUserSubscription: Subscription = new Subscription();
+
   constructor(private route: ActivatedRoute, private sUser: UserService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.initProfile();
+  }
+  
+  initProfile() {
+    this.routeParamsSubscription = this.route.params.subscribe(params => {
       this.userId = params['id'];
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       })
-      this.sUser.getUserById(this.userId).subscribe({
+      this.getUserSubscription = this.sUser.getUserById(this.userId).subscribe({
         next: (user) => {
           this.user = user;
           this.profileLoading = false;
@@ -32,5 +40,9 @@ export class ProfileComponent implements OnInit {
         }
       })
     });
+  }
+  ngOnDestroy(): void {
+    this.routeParamsSubscription.unsubscribe();
+    this.getUserSubscription.unsubscribe();
   }
 }

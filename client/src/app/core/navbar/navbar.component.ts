@@ -12,15 +12,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
   authData: AuthData | null = null;
   private authDataSubscription: Subscription | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(private sAuth: AuthService) {}
 
   ngOnInit(): void {
-    this.authDataSubscription = this.authService.getAuthDataObservable().subscribe((data) => {
+    this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
     });
   }
 
   ngOnDestroy(): void {
     this.authDataSubscription?.unsubscribe();
+  }
+
+  logout(): void {
+    this.sAuth.setAuthData(null);
+    localStorage.clear();
   }
 }
