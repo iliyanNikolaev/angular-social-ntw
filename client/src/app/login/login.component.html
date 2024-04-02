@@ -1,16 +1,25 @@
 <div class="wrapper" appScroll>
     <div class="container">
         <h1 class="heading">login</h1>
-        <form class="loginForm">
-            <div class="inputContainer">
+        <form class="loginForm" #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
+            <div class="inputContainer form-group">
                 <i class="fas fa-at icon"></i>
-                <input class="input" type="email" placeholder='email' />
+                <input name="email" class="input" type="email" placeholder='email' ngModel required email #emailInput="ngModel" />
             </div>
-            <div class="inputContainer">
+            <div class="inputContainer form-group">
                 <i class="fas fa-lock icon"></i>
-                <input class="input" type="password" placeholder='password' />
+                <input name="password" class="input" type="password" placeholder='password' ngModel required #passwordInput="ngModel"/>
             </div>
-            <button class="btn">login</button>
+            <button class="btn" [disabled]="loginForm.invalid">login</button>
+                <p *ngIf="emailInput.touched && emailInput.errors?.['email']">
+                    this input must be in email format
+                </p>
+                <p *ngIf="emailInput.touched && emailInput.errors?.['required']">
+                    email cannot be a empty string
+                </p>
+                <p *ngIf="emailInput.touched && passwordInput.errors?.['required']">
+                    password cannot be empty string
+                </p>
         </form>
 
         <span class="redirect"> If you dont have account,

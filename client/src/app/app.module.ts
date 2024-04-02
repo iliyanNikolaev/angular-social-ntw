@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { authInterceptorProvider } from './auth.interceptor';
 import { ScrollDirective } from './scroll.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ScrollDirective } from './scroll.directive';
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     authInterceptorProvider

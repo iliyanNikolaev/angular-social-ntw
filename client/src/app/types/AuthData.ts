@@ -1,0 +1,1 @@
+export type AuthData = { _id: string, fullName: string, profilePic: string }
