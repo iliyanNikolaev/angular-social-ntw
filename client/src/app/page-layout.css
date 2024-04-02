@@ -14,6 +14,7 @@
     border: 1px solid #13274F;
     box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.37);
     margin-bottom: 1rem;
+    width: 50%;
 }
 
 /* Custom (phones, 374px and down) */
@@ -54,6 +55,6 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .container {
-        width: 75%;
+        width: 50%;
     }
 }

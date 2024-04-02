@@ -1,9 +1,5 @@
 @import url("../page-layout.css");
 
-.container {
-    width: 50%;
-}
-
 .contentContainer{
     display: flex;
     flex-direction: column;

@@ -105,20 +105,3 @@
     font-size: medium;
     cursor: pointer;
 }
-@media (max-width: 600px) {
-    .container {
-        width: 90%;
-        height: 90%;
-    }
-    .input {
-        width: 90%;
-    }
-    
-}
-@media (max-width: 600px) {
-    .container {
-        width: 50%;
-        height: 50%;
-        overflow-x: hidden;
-    }
-}
