@@ -7,11 +7,12 @@ import { PostItemComponent } from './post-item/post-item.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { TimeAgoPipe } from './time-ago.pipe';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, CreatePostComponent, PostListComponent, PostItemComponent, CommentsComponent, LikesComponent],
+  declarations: [NavbarComponent, CreatePostComponent, PostListComponent, PostItemComponent, CommentsComponent, LikesComponent, TimeAgoPipe],
   imports: [
     CommonModule,
     AppRoutingModule
