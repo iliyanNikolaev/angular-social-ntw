@@ -4,8 +4,6 @@ const User = require('../models/User');
 async function getLastPosts(skip) {
     const posts = await Post.find()
         .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(5)
         .populate({
             path: 'likes',
             select: '_id firstName lastName profilePic'
@@ -20,7 +18,7 @@ async function getLastPosts(skip) {
         })
         .populate({
             path: 'owner',
-            select: '_id firstName lastName profilePic' // Избери само определените полета на owner
+            select: '_id firstName lastName profilePic' 
         });
     return posts;
 }

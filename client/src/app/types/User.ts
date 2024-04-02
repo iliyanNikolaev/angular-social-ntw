@@ -1,23 +1,11 @@
-import { PopulatedComment } from "./PopulatedComment"
 import { PopulatedUser } from "./PopulatedUser"
+import { Post } from "./Post"
 
 export type User = {
     _id: string,
     firstName: string,
     lastName: string,
     profilePic: string,
-    posts: PopulatedPost[],
+    posts: Post[],
     connections: PopulatedUser[]
-}
-
-type PopulatedPost = {
-    _id: string,
-    textContent: string,
-    picture: string,
-    likes: PopulatedUser[],
-    comments: PopulatedComment[],
-    owner: string,
-    createdAt: string,
-    updatedAt: string,
-    __v: number
 }

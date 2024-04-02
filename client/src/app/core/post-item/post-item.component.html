@@ -3,7 +3,7 @@
     <div class="upper">
         <img class="avatar" src="{{post.owner.profilePic}}" alt="avatar" />
         <div class="author">
-            <a routerLink="/profile/{{post.owner._id}}" class="fullName">John Doe</a>
+            <a routerLink="/profile/{{post.owner._id}}" class="fullName">{{post.owner.firstName}} {{post.owner.lastName}}</a>
             <span class="time">{{post.createdAt | timeAgo}}</span>
         </div>
     </div>

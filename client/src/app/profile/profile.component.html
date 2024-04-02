@@ -1,17 +1,18 @@
 <div class="wrapper">
-    <div class="container">
+    <app-spinner *ngIf="profileLoading"/>
+    <div class="container" *ngIf="user && !profileLoading">
         <div class="upper">
             <div class="editIconContainer">
                 <i class="fas fa-user-edit editIcon"></i>
             </div>
             <img class="cover" src="assets/cover.png" alt="cover" />
-            <img class="avatar" src="assets/ilich.jpg" alt="avatar" />
-            <span class="fullName">John Doe</span>
+            <img class="avatar" src="{{user.profilePic}}" alt="avatar" />
+            <span class="fullName">{{user.firstName}} {{user.lastName}}</span>
         </div>
         <div class="lower">
             <div class="controls">
                 <span class="connectionsBtn">
-                    12 connections
+                    {{user.connections.length}} connections
                 </span>
                 <button class="btn">
                     <i class="fas fa-link"> connect</i>
@@ -20,7 +21,7 @@
         </div>
 
         <div class="posts">
-            <app-post-list />
+            <app-post-list [posts]="user.posts"/>
         </div>
 
         <div class="controlsPagination">

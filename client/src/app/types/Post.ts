@@ -9,6 +9,6 @@ export type Post = {
     comments: PopulatedComment[],
     owner: PopulatedUser,
     createdAt: string,
-    updatedAt: string,
-    __v: number
+    updatedAt?: string,
+    __v?: number
 }

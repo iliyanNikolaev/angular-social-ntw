@@ -82,7 +82,12 @@ async function getUserById(id) {
                         path: 'owner',
                         select: '_id firstName lastName profilePic'
                     }
+                },
+                {
+                    path: 'owner',
+                    select: '_id firstName lastName profilePic'
                 }
+
             ]
         })
         .populate({
