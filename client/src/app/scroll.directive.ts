@@ -9,7 +9,6 @@ export class ScrollDirective implements OnInit {
 
   ngOnInit(): void {
     this.scrollToTop();
-    console.log('scroll')
   }
 
   private scrollToTop() {
