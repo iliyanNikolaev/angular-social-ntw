@@ -11,6 +11,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { authInterceptorProvider } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     CoreModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    authInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
