@@ -3,31 +3,14 @@
         <div class="contentContainer">
             <div class="commentList">
                 <h3 class="heading">comments</h3>
-                <div class="comment">
-                    <img class="avatar" src="assets/user.png" alt="avatar" />
+                <div class="comment" *ngFor="let comment of comments">
+                    <img class="avatar" src="{{comment.owner.profilePic}}" alt="avatar" />
                     <div class="commentContent">
-                        <span class="author">John Doe</span>
-                        <span class="textContent">Only Hardcoded comments</span>
+                        <span class="author">{{comment.owner.firstName}} {{comment.owner.lastName}}</span>
+                        <span class="textContent">{{comment.textContent}}</span>
                     </div>
                 </div>
-
-                <div class="comment">
-                    <img class="avatar" src="assets/user.png" alt="avatar" />
-                    <div class="commentContent">
-                        <span class="author">John Doe</span>
-                        <span class="textContent">Only Hardcoded comments</span>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <img class="avatar" src="assets/user.png" alt="avatar" />
-                    <div class="commentContent">
-                        <span class="author">John Doe</span>
-                        <span class="textContent">Only Hardcoded comments</span>
-                    </div>
-                </div>
-
-                <p>No comments yet...</p>
+                <p *ngIf="comments.length == 0">No comments yet...</p>
             </div>
 
             <form class="addCommentForm">

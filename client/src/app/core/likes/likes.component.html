@@ -3,28 +3,12 @@
         <div class="contentContainer">
             <div class="content">
                 <h3 class="heading">likes</h3>
-                <div class="like">
-                    <img class="avatar"
-                        src="assets/user.png" alt="avatar" />
-                    <span class="fullName">John Doe</span>
+                <div class="like" *ngFor="let like of likes">
+                    <img class="avatar" src="{{like.profilePic}}" alt="avatar" />
+                    <span class="fullName">{{like.firstName}} {{like.lastName}}</span>
                 </div>
-                <div class="like">
-                    <img class="avatar"
-                        src="assets/user.png" alt="avatar" />
-                    <span class="fullName">John Doe</span>
-                </div>
-                <div class="like">
-                    <img class="avatar"
-                        src="assets/user.png" alt="avatar" />
-                    <span class="fullName">John Doe</span>
-                </div>
-                <div class="like">
-                    <img class="avatar"
-                        src="assets/user.png" alt="avatar" />
-                    <span class="fullName">John Doe</span>
-                </div>
-                <p>No likes yet..</p>
             </div>
+            <p *ngIf="likes?.length == 0">No likes yet..</p>
         </div>
     </div>
 </div>

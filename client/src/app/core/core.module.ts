@@ -24,6 +24,7 @@ import { TimeAgoPipe } from './time-ago.pipe';
     PostItemComponent,
     CommentsComponent,
     LikesComponent,
+    TimeAgoPipe
   ]
 })
 export class CoreModule { }

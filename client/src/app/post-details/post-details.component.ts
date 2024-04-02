@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Post } from '../types/Post';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-details',
@@ -8,15 +10,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostDetailsComponent implements OnInit {
   postId: string = ''
-
-  commentsVisible: boolean = false;
+  post: Post | null = null;
+  postLoading: boolean = true;
   likesVisible: boolean = true;
+  commentsVisible: boolean = false;
   
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private sPost: PostService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.postId = params['id'];
-      console.log(this.postId);
+      this.sPost.getPostDetails(this.postId).subscribe({
+        next: (post) => {
+          this.post = post;
+          this.postLoading = false;
+        },
+        error: (err) => {
+          alert('Posts details fetching error!');
+          console.error(err); 
+        }
+      })
     });
   }
 

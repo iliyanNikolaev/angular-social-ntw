@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PopulatedComment } from 'src/app/types/PopulatedComment';
 
 @Component({
   selector: 'app-comments',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent {
-
+ @Input() comments: PopulatedComment[] = [];
 }

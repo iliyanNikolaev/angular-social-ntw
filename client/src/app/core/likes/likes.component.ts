@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PopulatedUser } from 'src/app/types/PopulatedUser';
 
 @Component({
   selector: 'app-likes',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./likes.component.css']
 })
 export class LikesComponent {
-
+  @Input() likes: PopulatedUser[] = [];
 }

@@ -1,28 +1,29 @@
 <div class="wrapper" appScroll>
     <div class="container">
-        <div class="contentContainer">
+        <app-spinner *ngIf="postLoading" />
+        <div class="contentContainer" *ngIf="!postLoading">
 
             <div class="upper">
-                <img class="avatar" src="assets/user.png" alt="avatar" />
+                <img class="avatar" src="{{post?.owner?.profilePic}}" alt="avatar" />
                 <div class="author">
-                    <a routerLink="/profile/2" class="fullName">John Doe</a>
-                    <span class="time">2 hours ago</span>
+                    <a routerLink="/profile/2" class="fullName">{{post?.owner?.firstName}} {{post?.owner?.lastName}}</a>
+                    <span class="time">{{post?.createdAt! | timeAgo}}</span>
                 </div>
             </div>
         
             <div class="lower">
-                <p class="postContent">This is hardcoded post</p>
-                <img class="postImg" src="assets/insta.webp" alt="post-image" />
+                <p class="postContent">{{post?.textContent}}</p>
+                <img class="postImg" src="{{post?.picture}}" alt="post-image" />
             </div>
         
             <div class="controls">
                 <div class="details">
-                    <span class="viewLikesBtn" (click)="showLikes()">12 likes</span>
-                    <span class="viewCommentsBtn" (click)="showComments()">0 comments</span>
+                    <span class="viewLikesBtn" (click)="showLikes()">{{post?.likes?.length}} likes</span>
+                    <span class="viewCommentsBtn" (click)="showComments()">{{post?.comments?.length}} comments</span>
                 </div>
             </div>
         </div>
-        <app-likes *ngIf="likesVisible"/>
-        <app-comments *ngIf="commentsVisible"/>
+        <app-likes *ngIf="likesVisible" [likes]="post?.likes!"/>
+        <app-comments *ngIf="commentsVisible" [comments]="post?.comments!"/>
     </div>
 </div>
