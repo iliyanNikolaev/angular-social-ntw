@@ -6,13 +6,15 @@ import { PostListComponent } from './post-list/post-list.component';
 import { PostItemComponent } from './post-item/post-item.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
 @NgModule({
   declarations: [NavbarComponent, CreatePostComponent, PostListComponent, PostItemComponent, CommentsComponent, LikesComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ],
   exports: [
     NavbarComponent,
