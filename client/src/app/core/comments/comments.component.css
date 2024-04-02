@@ -22,6 +22,11 @@
     align-items: flex-start;
     gap: 0.5rem;
     justify-content: center;
+    align-items: center;
+}
+
+.heading{
+    color: #13274F;
 }
 
 .comment {

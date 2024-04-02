@@ -1,6 +1,28 @@
 <div class="wrapper" appScroll>
     <div class="container">
-        <app-post-item />
-        <app-likes />
+        <div class="contentContainer">
+
+            <div class="upper">
+                <img class="avatar" src="assets/user.png" alt="avatar" />
+                <div class="author">
+                    <a routerLink="/profile/2" class="fullName">John Doe</a>
+                    <span class="time">2 hours ago</span>
+                </div>
+            </div>
+        
+            <div class="lower">
+                <p class="postContent">This is hardcoded post</p>
+                <img class="postImg" src="assets/insta.webp" alt="post-image" />
+            </div>
+        
+            <div class="controls">
+                <div class="details">
+                    <span class="viewLikesBtn" (click)="showLikes()">12 likes</span>
+                    <span class="viewCommentsBtn" (click)="showComments()">0 comments</span>
+                </div>
+            </div>
+        </div>
+        <app-likes *ngIf="likesVisible"/>
+        <app-comments *ngIf="commentsVisible"/>
     </div>
 </div>

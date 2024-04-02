@@ -21,8 +21,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
 }
-
+.heading{
+    color: #13274F;
+}
 .like {
     display: flex;
     align-items: center;

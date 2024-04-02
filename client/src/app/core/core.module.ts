@@ -22,7 +22,7 @@ import { AppRoutingModule } from '../app-routing.module';
     PostListComponent,
     PostItemComponent,
     CommentsComponent,
-    LikesComponent
+    LikesComponent,
   ]
 })
 export class CoreModule { }

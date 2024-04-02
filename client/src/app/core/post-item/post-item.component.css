@@ -48,6 +48,9 @@
     margin-bottom: 1rem;
     cursor: pointer;
 }
+.postImg:hover{
+    opacity: 0.8;
+}
 
 .lower{
     display: flex;
@@ -86,12 +89,6 @@
 .details{
     display: flex;
     justify-content: space-between;
-}
-
-.viewLikesBtn:hover,
-.viewCommentsBtn:hover{
-    cursor: pointer;
-    font-weight: bold;
 }
 
 @media only screen and (min-width: 1200px) {
