@@ -1,6 +1,6 @@
 <div class="wrapper" appScroll>
     <div class="container">
-        
+
         <div class="notLogged">
             <a routerLink='/login' class="loginText">
                 <i class="fas fa-sign-in-alt loginIcon"></i>
@@ -10,13 +10,16 @@
 
         <app-create-post />
 
-        <app-post-list />
 
+        <app-spinner *ngIf="postListLoading" />
+
+        <app-post-list *ngIf="!postListLoading" [posts]="posts"/>
+        
         <div class="controls">
-            <button class="btn">
+            <button class="btn" [disabled]="postListLoading">
                 <i class="fas fa-angle-double-left"></i> Prev
             </button>
-            <button class="btn">
+            <button class="btn" [disabled]="postListLoading">
                 Next <i class="fas fa-angle-double-right"></i>
             </button>
         </div>

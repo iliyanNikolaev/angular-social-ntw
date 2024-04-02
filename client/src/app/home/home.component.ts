@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../post.service';
+import { Post } from '../types/Post';
 
 @Component({
   selector: 'app-home',
@@ -6,12 +8,23 @@ import { Component, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(
-    private elRef: ElementRef
-  ) { }
+  posts: Post[] = []
+  postListLoading: boolean = true;
+
+  constructor(private sPost: PostService) { }
 
   ngOnInit(): void {
-    
+
+    this.sPost.getPosts(0).subscribe({
+      next: (posts) => {
+        this.posts = posts;
+        this.postListLoading = false;
+      },
+      error: (err) => {
+       alert('Posts fetching error!');
+       console.error(err); 
+      }
+    })
   }
 
   

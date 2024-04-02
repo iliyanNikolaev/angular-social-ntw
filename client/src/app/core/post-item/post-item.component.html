@@ -1,16 +1,16 @@
 <div class="container">
 
     <div class="upper">
-        <img class="avatar" src="assets/user.png" alt="avatar" />
+        <img class="avatar" src="{{post.owner.profilePic}}" alt="avatar" />
         <div class="author">
-            <a routerLink="/profile/2" class="fullName">John Doe</a>
-            <span class="time">2 hours ago</span>
+            <a routerLink="/profile/{{post.owner._id}}" class="fullName">John Doe</a>
+            <span class="time">{{post.createdAt}}</span>
         </div>
     </div>
 
-    <div class="lower" routerLink="/post/1">
-        <p class="postContent">This is hardcoded post</p>
-        <img class="postImg" src="assets/insta.webp" alt="post-image" />
+    <div class="lower" routerLink="/post/{{post._id}}">
+        <p class="postContent">{{post.textContent}}</p>
+        <img class="postImg" src="{{post.picture}}" alt="post-image" />
     </div>
 
     <div class="controls">
@@ -19,8 +19,8 @@
             </div>
 
         <div class="details">
-            <span class="viewLikesBtn">12 likes</span>
-            <span class="viewCommentsBtn">0 comments</span>
+            <span class="viewLikesBtn">{{post.likes.length}} likes</span>
+            <span class="viewCommentsBtn">{{post.comments.length}} comments</span>
         </div>
     </div>
 </div>
