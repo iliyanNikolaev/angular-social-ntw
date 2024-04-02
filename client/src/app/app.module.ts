@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { authInterceptorProvider } from './auth.interceptor';
+import { ScrollDirective } from './scroll.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { authInterceptorProvider } from './auth.interceptor';
     AllUsersComponent,
     LoginComponent,
     RegisterComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    ScrollDirective
   ],
   imports: [
     BrowserModule,
