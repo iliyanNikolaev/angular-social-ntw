@@ -43,7 +43,7 @@ export class PostItemComponent implements OnInit, OnDestroy {
           }
         } else {
           this.postIsLikedByUser = true;
-          const [firstName, lastName] = this.authData?.fullName.split(' ')!
+          const [firstName, lastName] = [...this.authData?.fullName.split(' ')!]
           this.post.likes.push({
             _id: this.authData?._id!,
             firstName,

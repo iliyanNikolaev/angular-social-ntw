@@ -3,7 +3,7 @@
     <div class="container" *ngIf="user && !profileLoading">
         <div class="upper">
             <div class="editIconContainer">
-                <i class="fas fa-user-edit editIcon"></i>
+                <i class="fas fa-user-edit editIcon" *ngIf="authData"></i>
             </div>
             <img class="cover" src="assets/cover.png" alt="cover" />
             <img class="avatar" src="{{user.profilePic}}" alt="avatar" />
@@ -23,15 +23,7 @@
 
         <div class="posts">
             <app-post-list [posts]="user.posts"/>
-        </div>
-
-        <div class="controlsPagination">
-            <button class="btnPagination">
-                <i class="fas fa-angle-double-left"></i> Prev
-            </button>
-            <button class="btnPagination">
-                Next <i class="fas fa-angle-double-right"></i>
-            </button>
+            <span *ngIf="user.posts.length == 0">No posts yet...</span>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@
     </div>
 
     <div class="controls">
-            <div class="actions">
+            <div class="actions" *ngIf="authData">
                 <i class="fas fa-thumbs-up likeBtn likeIcon" *ngIf="!postIsLikedByUser" (click)="likePost()">Like</i>
                 <i class="fas fa-heart-broken likeIcon" *ngIf="postIsLikedByUser" (click)="likePost()">Unlike</i>
             </div>

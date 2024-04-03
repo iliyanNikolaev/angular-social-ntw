@@ -13,7 +13,7 @@
                 <p *ngIf="comments.length == 0">No comments yet...</p>
             </div>
 
-            <form class="addCommentForm" #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)">
+            <form class="addCommentForm" #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)" *ngIf="authData">
                 <span class="addCommentHeading">add comment</span>
 
                 <div class="inputContainer form-group">
