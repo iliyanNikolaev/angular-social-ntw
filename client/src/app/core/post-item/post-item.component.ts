@@ -15,9 +15,9 @@ export class PostItemComponent implements OnInit, OnDestroy {
   authData: AuthData | null = null;
   postIsLikedByUser: boolean = false;
   private authDataSubscription: Subscription | undefined;
+  private toggleLikeSubscription: Subscription | undefined;
   constructor(private sAuth: AuthService, private sPost: PostService) { }
-  @ViewChild('likeBtn') likeBtn!: ElementRef;
-  @ViewChild('unlikeBtn') unlikeBtn!: ElementRef;
+
   ngOnInit(): void {
     this.getAuthData();
 
@@ -33,7 +33,7 @@ export class PostItemComponent implements OnInit, OnDestroy {
     });
   }
   likePost() {
-    this.sPost.toggleLike(this.post._id).subscribe({
+    this.toggleLikeSubscription = this.sPost.toggleLike(this.post._id).subscribe({
       next: () => {
         if (this.postIsLikedByUser) {
           this.postIsLikedByUser = false;
@@ -60,11 +60,6 @@ export class PostItemComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.authDataSubscription?.unsubscribe();
-    if (this.likeBtn) {
-      this.likeBtn.nativeElement.removeEventListener('click', this.likePost)
-    }
-    if (this.unlikeBtn) {
-      this.unlikeBtn.nativeElement.removeEventListener('click', this.likePost)
-    }
+    this.toggleLikeSubscription?.unsubscribe();
   }
 }
