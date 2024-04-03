@@ -14,8 +14,9 @@
                 <span class="connectionsBtn">
                     {{user.connections.length}} connections
                 </span>
-                <button class="btn">
-                    <i class="fas fa-link"> connect</i>
+                <button class="btn" *ngIf="authData && !isOwnProfile">
+                    <i class="fas fa-link" *ngIf="!isOwnProfile && !isFollower" (click)="toggleConnect(user._id)"> connect</i>
+                    <i class="fas fa-link" *ngIf="isFollower" (click)="toggleConnect(user._id)"> disconnect</i>
                 </button>
             </div>
         </div>
