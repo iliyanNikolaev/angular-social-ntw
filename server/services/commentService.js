@@ -10,7 +10,8 @@ async function createComment(commentData) {
     await Post.updateOne(
         { _id: commentData.postId },
         { $push: { comments: comment._id } });
-    return comment;
+    const res = await Comment.findById(comment._id).populate({ path: 'owner', select: '_id firstName lastName profilePic'})
+    return res;
 }
 
 async function deleteCommentById(id, reqUserId) {

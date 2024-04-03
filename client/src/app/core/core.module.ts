@@ -8,6 +8,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { TimeAgoPipe } from './time-ago.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { TimeAgoPipe } from './time-ago.pipe';
   declarations: [NavbarComponent, CreatePostComponent, PostListComponent, PostItemComponent, CommentsComponent, LikesComponent, TimeAgoPipe],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   exports: [
     NavbarComponent,

@@ -24,6 +24,6 @@
             </div>
         </div>
         <app-likes *ngIf="likesVisible" [likes]="post?.likes!"/>
-        <app-comments *ngIf="commentsVisible" [comments]="post?.comments!"/>
+        <app-comments *ngIf="commentsVisible" [comments]="post?.comments!" [postId]="post?._id!" />
     </div>
 </div>

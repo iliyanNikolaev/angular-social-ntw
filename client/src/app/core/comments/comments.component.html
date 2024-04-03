@@ -13,15 +13,20 @@
                 <p *ngIf="comments.length == 0">No comments yet...</p>
             </div>
 
-            <form class="addCommentForm">
+            <form class="addCommentForm" #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)">
                 <span class="addCommentHeading">add comment</span>
 
-                <div class="inputContainer">
+                <div class="inputContainer form-group">
                     <i class="fas fa-comment-dots icon"></i>
-                    <input class="input" type="text" placeholder='comment'/>
+                    <input name="textContent" class="input" type="text" placeholder='comment' ngModel required
+                        #commentInput="ngModel" />
                 </div>
 
-                <button class="btn">Add</button>
+                <p *ngIf="commentInput.touched && commentInput.errors?.['required']">
+                    comment cannot be empty string
+                </p>
+
+                <button class="btn" [disabled]="commentForm.invalid">Add</button>
             </form>
         </div>
     </div>
