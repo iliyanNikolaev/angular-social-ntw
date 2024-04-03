@@ -46,9 +46,23 @@
 .commentContent{
     display: flex;
     flex-direction: column;
-    gap: 0.1rem;
+    gap: 1rem;
+    align-items: first baseline;
+    border: 1px solid #13274F;
+    padding: 1rem;
+    border-radius: .5rem;
+    align-items: center;
+    min-width: 20rem;
 }
 
+.deleteIcon{
+    color: darkred;
+    font-size: large;
+}
+.deleteIcon:hover{
+    cursor: pointer;
+    scale: 0.9;
+}
 .author{
     font-size: medium;
     font-weight: bold;

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 import { PostService } from 'src/app/post.service';
@@ -43,7 +43,11 @@ export class PostItemComponent implements OnInit, OnDestroy {
           }
         } else {
           this.postIsLikedByUser = true;
-          const [firstName, lastName] = [...this.authData?.fullName.split(' ')!]
+          let firstName = '';
+          let lastName = '';
+          if (this.authData?.fullName) {
+            [firstName, lastName] = this.authData.fullName.split(' ');
+          }
           this.post.likes.push({
             _id: this.authData?._id!,
             firstName,
@@ -58,6 +62,7 @@ export class PostItemComponent implements OnInit, OnDestroy {
       }
     })
   }
+
   ngOnDestroy(): void {
     this.authDataSubscription?.unsubscribe();
     this.toggleLikeSubscription?.unsubscribe();

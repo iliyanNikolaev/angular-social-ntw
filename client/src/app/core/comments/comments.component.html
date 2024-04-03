@@ -8,6 +8,7 @@
                     <div class="commentContent">
                         <span class="author">{{comment.owner.firstName}} {{comment.owner.lastName}}</span>
                         <span class="textContent">{{comment.textContent}}</span>
+                        <i class="fas fa-trash deleteIcon" *ngIf="comment.owner._id == authData?._id" (click)="deleteComment(comment._id)">delete</i>
                     </div>
                 </div>
                 <p *ngIf="comments.length == 0">No comments yet...</p>

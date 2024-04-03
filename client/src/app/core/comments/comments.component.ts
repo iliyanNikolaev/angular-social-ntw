@@ -46,6 +46,17 @@ export class CommentsComponent implements OnInit {
     })
   }
 
+  deleteComment(commentId: string) {
+    this.sComment.deleteComment(commentId).subscribe({
+      next: () => {
+        this.comments = this.comments.filter(comment => comment._id !== commentId);
+      },
+      error: (err) => {
+        alert('delete comment error');
+      }
+    });
+  }
+  
   ngOnDestroy(): void {
     this.authDataSubscription?.unsubscribe();
   }
