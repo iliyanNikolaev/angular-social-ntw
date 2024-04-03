@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   posts: Post[] = []
   postListLoading: boolean = true;
   authData: AuthData | null = null;
+  postIsLikedByUser: boolean = false;
   private authDataSubscription: Subscription | undefined;
   private postsDataSubscription: Subscription | undefined;
 
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
   getPosts() {
     this.postsDataSubscription = this.sPost.getPosts(0).subscribe({
       next: (posts) => {
-        this.posts = posts;
+        this.posts = posts.filter(post => post.owner._id != this.authData?._id);
         this.postListLoading = false;
       },
       error: (err) => {

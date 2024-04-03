@@ -15,7 +15,8 @@
 
     <div class="controls">
             <div class="actions">
-                <i class="fas fa-thumbs-up likeBtn likeIcon">Like</i>
+                <i class="fas fa-thumbs-up likeBtn likeIcon" *ngIf="!postIsLikedByUser" (click)="likePost()" #likeBtn>Like</i>
+                <i class="fas fa-heart-broken likeIcon" *ngIf="postIsLikedByUser" (click)="likePost()" #unlikeBtn>Unlike</i>
             </div>
 
         <div class="details">

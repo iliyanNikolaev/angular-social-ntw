@@ -77,7 +77,7 @@
     gap: 0.5rem;
 }
 
-.likeBtn:hover{
+.likeIcon:hover{
     cursor: pointer;
     scale: 0.9;
 }

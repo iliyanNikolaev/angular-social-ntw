@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL } from './constants';
+import { Post } from './types/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  getPosts(skip: number = 0): Observable<any> {
-    return this.http.get<any>(`${API_URL}/posts?skip=${skip}`);
+  getPosts(skip: number = 0): Observable<Post[]> {
+    return this.http.get<Post[]>(`${API_URL}/posts?skip=${skip}`);
   }
 
   getPostsByUserId(userId: string, skip: number = 0): Observable<any> {
