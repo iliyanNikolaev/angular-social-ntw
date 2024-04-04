@@ -1,1 +1,6 @@
-export type AuthData = { _id: string, fullName: string, profilePic: string }
+export type AuthData = { 
+    _id: string, 
+    firstName: string,
+    lastName: string, 
+    profilePic: string 
+}

@@ -21,7 +21,8 @@ export class AuthService {
     }
     return {
       _id: localStorage.getItem('_id') || '',
-      fullName: localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName') || '',
+      firstName: localStorage.getItem('firstName') || '',
+      lastName: localStorage.getItem('firstName') || '',
       profilePic: localStorage.getItem('profilePic') || ''
     };
   }

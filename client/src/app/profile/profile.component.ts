@@ -78,11 +78,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   toggleConnect(id: string) {
     this.sUser.connectUser(id).subscribe({
       next: () => {
-        const [firstName, lastName] = this.authData?.fullName.split(' ')!;
         const conn = {
           _id: this.authData?._id || '',
-          firstName,
-          lastName,
+          firstName: this.authData?.firstName || '',
+          lastName: this.authData?.lastName || '',
           profilePic: this.authData?.profilePic || ''
         }
   

@@ -16,6 +16,8 @@ export class CommentsComponent implements OnInit {
   @Input() postId: string = '';
   authData: AuthData | null = null;
   private authDataSubscription: Subscription | undefined;
+  private createCommentSubscription: Subscription | undefined;
+  private deleteCommentSubscription: Subscription | undefined;
 
   constructor(private sComment: CommentService, private sAuth: AuthService) { }
 
@@ -35,7 +37,7 @@ export class CommentsComponent implements OnInit {
     }
     const { textContent } = form.value;
 
-    this.sComment.createComment({ textContent, postId: this.postId }).subscribe({
+    this.createCommentSubscription = this.sComment.createComment({ textContent, postId: this.postId }).subscribe({
       next: (comment) => {
         this.comments.push({_id: comment._id, textContent: comment.textContent, owner: comment.owner});
         form.reset();
@@ -47,7 +49,7 @@ export class CommentsComponent implements OnInit {
   }
 
   deleteComment(commentId: string) {
-    this.sComment.deleteComment(commentId).subscribe({
+    this.deleteCommentSubscription = this.sComment.deleteComment(commentId).subscribe({
       next: () => {
         this.comments = this.comments.filter(comment => comment._id !== commentId);
       },
@@ -59,5 +61,7 @@ export class CommentsComponent implements OnInit {
   
   ngOnDestroy(): void {
     this.authDataSubscription?.unsubscribe();
+    this.createCommentSubscription?.unsubscribe();
+    this.deleteCommentSubscription?.unsubscribe();
   }
 }

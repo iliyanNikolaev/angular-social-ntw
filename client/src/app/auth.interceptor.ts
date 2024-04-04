@@ -25,7 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
           if (event instanceof HttpResponse && event.status === 200) {
             const { _id, firstName, lastName, profilePic, token } = event.body;
             localStorage.setItem('token', token);
-            localStorage.setItem('fullName', firstName + ' ' + lastName);
+            localStorage.setItem('firstName', firstName);
+            localStorage.setItem('lastName', lastName);
             localStorage.setItem('profilePic', profilePic);
             localStorage.setItem('_id', _id);
           }

@@ -43,16 +43,11 @@ export class PostItemComponent implements OnInit, OnDestroy {
           }
         } else {
           this.postIsLikedByUser = true;
-          let firstName = '';
-          let lastName = '';
-          if (this.authData?.fullName) {
-            [firstName, lastName] = this.authData.fullName.split(' ');
-          }
           this.post.likes.push({
-            _id: this.authData?._id!,
-            firstName,
-            lastName,
-            profilePic: this.authData?.profilePic!
+            _id: this.authData?._id || '',
+            firstName: this.authData?.firstName || '',
+            lastName: this.authData?.lastName || '',
+            profilePic: this.authData?.profilePic || ''
           });
         }
       },
