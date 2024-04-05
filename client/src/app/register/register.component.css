@@ -62,3 +62,16 @@
     color: #13274F;
     font-weight: bold;
 }
+.errorsCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.errorsCont p {
+    font-weight: 600;
+    color: white;
+    background-color: red;
+    padding: .5rem;
+    border-radius: .5rem;
+}

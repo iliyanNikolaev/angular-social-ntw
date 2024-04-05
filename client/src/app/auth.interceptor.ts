@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (request.url.includes('/users/login')) {
+    if (request.url.includes('/users/login') || request.url.includes('/users/register')) {
       return next.handle(request).pipe(
         tap((response) => {
           if (response instanceof HttpResponse && response.status === 200) {

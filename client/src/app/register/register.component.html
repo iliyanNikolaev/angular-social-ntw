@@ -1,38 +1,62 @@
 <div class="wrapper" appScroll>
-
     <div class="container">
         <h1 class="heading">register</h1>
 
-        <form class="registerForm">
+        <form class="registerForm" #registerForm="ngForm" (ngSubmit)="registerSubmit(registerForm)">
 
             <div class="inputContainer">
                 <i class="fas fa-at icon"></i>
-                <input class="input" type="email" placeholder='email' />
+                <input name="email" class="input" type="email" placeholder='email' ngModel required #emailInput="ngModel" />
             </div>
 
             <div class="inputContainer">
                 <i class="fas fa-signature icon"></i>
-                <input class="input" type="text" placeholder='first name' />
+                <input name="firstName" class="input" type="text" placeholder='first name' ngModel required #firstNameInput="ngModel" />
             </div>
 
             <div class="inputContainer">
                 <i class="fas fa-signature icon"></i>
-                <input class="input" type="text" placeholder='last name' />
+                <input name="lastName" class="input" type="text" placeholder='last name' ngModel required #lastNameInput="ngModel" />
             </div>
+
             <div class="inputContainer">
                 <i class="fas fa-lock icon"></i>
-                <input class="input" type="password" placeholder='password' />
+                <input name="password" class="input" type="password" placeholder='password' ngModel required #passwordInput="ngModel" />
             </div>
 
             <div class="inputContainer">
                 <i class="fas fa-redo-alt repeat icon"></i>
-                <input class="input" type="password" placeholder='repeat' />
+                <input name="repeat" class="input" type="password" placeholder='repeat' ngModel required #repeatPasswordInput="ngModel" />
             </div>
 
-            <button class="btn">register</button>
+            <button class="btn" [disabled]="registerForm.invalid">register</button>
+
+            <div *ngIf="registerForm.invalid" class="errorsCont">
+                <p *ngIf="emailInput.touched && emailInput.errors?.['required']">
+                    Email is required
+                </p>
+                <p *ngIf="emailInput.touched && emailInput.errors?.['email']">
+                    Invalid email format
+                </p>
+                <p *ngIf="firstNameInput.touched && firstNameInput.errors?.['required']">
+                    First name is required
+                </p>
+                <p *ngIf="lastNameInput.touched && lastNameInput.errors?.['required']">
+                    Last name is required
+                </p>
+                <p *ngIf="passwordInput.touched && passwordInput.errors?.['required']">
+                    Password is required
+                </p>
+                <p *ngIf="repeatPasswordInput.touched && repeatPasswordInput.errors?.['required']">
+                    Repeat password is required
+                </p>
+                <p *ngIf="repeatPasswordInput.touched && passwordInput.value !== repeatPasswordInput.value">
+                    Passwords do not match
+                </p>
+            </div>
         </form>
 
-        <span class="redirect"> If you already have account,
+        <span class="redirect"> If you already have an account,
             <a class="link" routerLink='/login'> login here!</a>
         </span>
     </div>

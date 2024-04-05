@@ -120,9 +120,6 @@ function registerDto(req) {
     if(req.body.password.length < 4) {
         throw new Error('The password should be at least 4 characters long');
     }
-    if(req.body.password != req.body.repeat) {
-        throw new Error('The repeat password should be equal to the password');
-    }
 }
 function loginDto(req) {
     if(req.body.email == '' || req.body.password == '') {
