@@ -9,6 +9,7 @@ import { LikesComponent } from './likes/likes.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { TimeAgoPipe } from './time-ago.pipe';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     NavbarComponent,

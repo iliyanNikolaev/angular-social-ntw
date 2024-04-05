@@ -7,7 +7,7 @@
     </span>
   </div>
   <div class="photoContainer form-group" (change)="onFileSelected($event)" accept="image/*" ngModel
-    #imageInput="ngModel">
+    #imageInput="ngModel" [ngModelOptions]="{standalone: true}" name="imageInput">
     <span class="photoSpan" *ngIf="!selectedFile">add picture</span>
     <span class="photoSpan" *ngIf="selectedFile">added</span>
     <div *ngIf="imageInput.touched">
@@ -22,5 +22,6 @@
       <input id="file" class="addHidden" type="file" (change)="onFileSelected($event)" />
     </label>
   </div>
-  <button [disabled]="createPostForm.invalid" class="btn">post</button>
+  <button [disabled]="createPostForm.invalid" class="btn" *ngIf="!isLoading">post</button>
+  <app-spinner *ngIf="isLoading"/>
 </form>

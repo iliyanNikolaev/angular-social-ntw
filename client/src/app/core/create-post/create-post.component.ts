@@ -14,16 +14,17 @@ export class CreatePostComponent {
   @Output() postCreated: EventEmitter<Post> = new EventEmitter<Post>();
   selectedFile: File | null = null;
   auth: AuthData | null = null;
+  isLoading: boolean = false;
   constructor(private sCloudinary: CloudinaryService, private sPost: PostService) { }
-  ngOnInit() {
 
-  }
   createPostSubmit(form: NgForm) {
     if (form.invalid) {
       return alert('invalid form');
     }
+    this.isLoading = true;
     if (this.selectedFile && !(this.selectedFile.type.startsWith('image'))) {
       form.controls['image'].setErrors({ 'invalidImage': true });
+      this.isLoading = false;
     } else if (this.selectedFile && this.selectedFile.type.startsWith('image')) {
       console.log('img');
       this.sCloudinary.uploadImage(this.selectedFile).subscribe({
@@ -32,6 +33,7 @@ export class CreatePostComponent {
             next: (post) => {
               this.postCreated.emit(post);
               form.reset();
+              this.isLoading = false;
             },
             error: console.error
           });
@@ -43,6 +45,7 @@ export class CreatePostComponent {
         next: (post) => {
           this.postCreated.emit(post);
           form.reset();
+          this.isLoading = false;
         },
         error: (err) => console.error
       });
