@@ -33,6 +33,7 @@ export class CreatePostComponent {
             next: (post) => {
               this.postCreated.emit(post);
               form.reset();
+              this.selectedFile = null;
               this.isLoading = false;
             },
             error: console.error

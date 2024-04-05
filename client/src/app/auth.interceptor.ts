@@ -21,9 +21,9 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     if (request.url.includes('/users/login')) {
       return next.handle(request).pipe(
-        tap((event) => {
-          if (event instanceof HttpResponse && event.status === 200) {
-            const { _id, firstName, lastName, profilePic, token } = event.body;
+        tap((response) => {
+          if (response instanceof HttpResponse && response.status === 200) {
+            const { _id, firstName, lastName, profilePic, token } = response.body;
             localStorage.setItem('token', token);
             localStorage.setItem('firstName', firstName);
             localStorage.setItem('lastName', lastName);

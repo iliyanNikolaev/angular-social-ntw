@@ -22,7 +22,7 @@ export class AuthService {
     return {
       _id: localStorage.getItem('_id') || '',
       firstName: localStorage.getItem('firstName') || '',
-      lastName: localStorage.getItem('firstName') || '',
+      lastName: localStorage.getItem('lastName') || '',
       profilePic: localStorage.getItem('profilePic') || ''
     };
   }

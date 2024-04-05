@@ -8,5 +8,6 @@
                 <span class="username" routerLink="/profile/{{user._id}}">{{user.firstName}} {{user.lastName}}</span> 
             </ng-container>
         </div>
+        <p *ngIf="filteredUsers.length === 0">There are no users matching this name...</p>
     </div>
 </div>

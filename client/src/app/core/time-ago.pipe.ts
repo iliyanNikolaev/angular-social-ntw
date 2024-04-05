@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, interval } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Pipe({
   name: 'timeAgo',
@@ -8,7 +9,10 @@ import { Observable, of } from 'rxjs';
 export class TimeAgoPipe implements PipeTransform {
 
   transform(timestamp: string): Observable<string> {
-    return of(this.calculateTimeAgo(timestamp));
+    return interval(9000).pipe( 
+      startWith(0), 
+      map(() => this.calculateTimeAgo(timestamp))
+    );
   }
 
   private calculateTimeAgo(timestamp: string): string {
