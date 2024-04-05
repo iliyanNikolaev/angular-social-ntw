@@ -6,15 +6,16 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { NotAuthGuard } from './not-auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent },
-  { path: 'post/:id', component: PostDetailsComponent},
+  { path: 'post/:id', component: PostDetailsComponent },
   { path: 'profile/:id', component: ProfileComponent },
-  { path: 'users', component: AllUsersComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'users', component: AllUsersComponent },
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
+  { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] }
 ];
 
 @NgModule({
