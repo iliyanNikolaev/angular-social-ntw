@@ -73,7 +73,26 @@
     display: flex;
     justify-content: space-between;
 }
-
+.ownerIcons{
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+.editIcon,
+.deleteIcon{
+    font-size: larger;
+}
+.editIcon:hover,
+.deleteIcon:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+.editIcon{
+    color: green;
+}
+.deleteIcon{
+    color: red;
+}
 @media only screen and (min-width: 1200px) {
     .contentContainer {
         width: 100%;

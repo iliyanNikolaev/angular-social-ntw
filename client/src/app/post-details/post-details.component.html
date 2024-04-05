@@ -22,6 +22,11 @@
                     <span class="viewCommentsBtn" (click)="showComments()">{{post?.comments?.length}} comments</span>
                 </div>
             </div>
+
+            <div class="ownerIcons" *ngIf="authData && authData._id == post?.owner?._id">
+                <i class="fas fa-edit editIcon">Edit</i>
+                <i class="fas fa-trash-alt deleteIcon">Delete</i>
+            </div>
         </div>
         <app-likes *ngIf="likesVisible" [likes]="post?.likes!"/>
         <app-comments *ngIf="commentsVisible" [comments]="post?.comments!" [postId]="post?._id!" (removeCommentFromPostState)="removeCommentFromPostState($event)" />

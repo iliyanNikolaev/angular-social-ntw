@@ -1,22 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../types/Post';
 import { PostService } from '../post.service';
+import { AuthData } from '../types/AuthData';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.css']
 })
-export class PostDetailsComponent implements OnInit {
+export class PostDetailsComponent implements OnInit, OnDestroy {
   postId: string = ''
   post: Post | null = null;
   postLoading: boolean = true;
   likesVisible: boolean = true;
   commentsVisible: boolean = false;
-  
-  constructor(private route: ActivatedRoute, private sPost: PostService) { }
+  authData: AuthData | null = null;
+  private authDataSubscription: Subscription | undefined;
+  constructor(private route: ActivatedRoute, private sPost: PostService, private sAuth: AuthService) { }
+  getAuthData() {
+    this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
+      this.authData = data;
+    });
+  }
   ngOnInit(): void {
+    this.getAuthData();
     this.route.params.subscribe(params => {
       this.postId = params['id'];
       this.sPost.getPostDetails(this.postId).subscribe({
@@ -43,5 +53,9 @@ export class PostDetailsComponent implements OnInit {
   showLikes() {
     this.commentsVisible = false;
     this.likesVisible = true;
+  }
+
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
   }
 }
