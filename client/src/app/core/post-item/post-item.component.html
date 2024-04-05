@@ -10,7 +10,7 @@
 
     <div class="lower" routerLink="/post/{{post._id}}">
         <p class="postContent">{{post.textContent}}</p>
-        <img class="postImg" src="{{post.picture}}" alt="post-image" />
+        <img class="postImg" src="{{post.picture}}" alt="post-image" *ngIf="post.picture"/>
     </div>
 
     <div class="controls">

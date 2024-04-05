@@ -1,14 +1,26 @@
-<div class="create-post-container">
+<form class="create-post-container" #createPostForm="ngForm" (ngSubmit)="createPostSubmit(createPostForm)">
   <p class="heading">Add new post</p>
-  <textarea class="text" rows="2"></textarea>
-  <div class="photoContainer">
-    <span class="photoSpan">add picture</span>
-    <label for='file' class="addFile">
+  <textarea name="textContent" class="text" rows="2" ngModel required #textContentInput="ngModel"></textarea>
+  <div *ngIf="textContentInput.touched">
+    <span *ngIf="textContentInput.errors?.['required']">
+      post text content cannot be a empty string
+    </span>
+  </div>
+  <div class="photoContainer form-group" (change)="onFileSelected($event)" accept="image/*" ngModel
+    #imageInput="ngModel">
+    <span class="photoSpan" *ngIf="!selectedFile">add picture</span>
+    <span class="photoSpan" *ngIf="selectedFile">added</span>
+    <div *ngIf="imageInput.touched">
+      <span *ngIf="imageInput.errors?.['invalidImage']">
+        Please select a valid image file
+      </span>
+    </div>
+    <label for='file' class="addFile form-group">
       <div class="addFileBtn">
         <i class="fas fa-images addVisible"></i>
       </div>
-      <input id='file' class="addHidden" type="file" />
+      <input id="file" class="addHidden" type="file" (change)="onFileSelected($event)" />
     </label>
   </div>
-  <button class="btn">post</button>
-</div>
+  <button [disabled]="createPostForm.invalid" class="btn">post</button>
+</form>

@@ -24,7 +24,9 @@ export class HomeComponent implements OnInit {
    this.getAuthData();
    this.getPosts(); 
   }
-
+    onPostCreated(newPost: Post) {
+    this.posts.unshift(newPost); 
+  }
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;

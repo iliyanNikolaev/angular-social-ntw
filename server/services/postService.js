@@ -67,7 +67,8 @@ async function createPost(postData) {
     await User.updateOne(
         { _id: postData.owner },
         { $push: { posts: post._id } });
-    return post;
+    const created = await getPostById(post._id);
+    return created;
 }
 
 async function editPostById(id, postData) {
@@ -78,7 +79,7 @@ async function editPostById(id, postData) {
             textContent: postData.textContent
         });
     }
-    const edited = await Post.findById(id);
+    const edited = await getPostById(id);
     return edited;
 }
 

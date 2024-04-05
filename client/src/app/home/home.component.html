@@ -8,7 +8,7 @@
             </a>
         </div>
 
-        <app-create-post *ngIf="authData"/>
+        <app-create-post *ngIf="authData" (postCreated)="onPostCreated($event)"/>
 
 
         <app-spinner *ngIf="postListLoading" />
