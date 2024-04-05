@@ -12,8 +12,10 @@ import { AuthData } from '../types/AuthData';
 })
 export class AllUsersComponent implements OnInit, OnDestroy {
   users: PopulatedUser[] = [];
+  filteredUsers: PopulatedUser[] = [];
   usersLoading: boolean = true;
   authData: AuthData | null = null;
+  searchString: string = '';
   private usersSubscription: Subscription = new Subscription();
   private authDataSubscription: Subscription | undefined;
   
@@ -28,6 +30,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     this.usersSubscription = this.sUser.getAllUsers().subscribe({
       next: (users) => {
         this.users = users;
+        this.filteredUsers = users;
         this.usersLoading = false;
       },
       error: (err) => {
@@ -36,10 +39,23 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
     });
+  }
+  filterUsers(e: Event, input: HTMLInputElement): void {
+    if (input.value == '') {
+      this.filteredUsers = [...this.users];
+      return;
+    } else {
+      const lowerCaseSearch = input.value.toLowerCase();
+      this.filteredUsers = this.users.filter(user => 
+        user.firstName.toLowerCase().includes(lowerCaseSearch) || 
+        user.lastName.toLowerCase().includes(lowerCaseSearch)
+      );
+    }
   }
   ngOnDestroy(): void {
     this.usersSubscription?.unsubscribe();
