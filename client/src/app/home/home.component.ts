@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
         this.postListLoading = false;
       },
       error: (err) => {
-       alert('Posts fetching error!');
+        alert(err.error.errors.join('\n'));
        console.error(err); 
       }
     })

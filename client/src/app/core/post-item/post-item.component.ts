@@ -20,7 +20,6 @@ export class PostItemComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAuthData();
-    console.log(this.post)
     for (const like of this.post.likes) {
       if (like._id == this.authData?._id) {
         this.postIsLikedByUser = true;
@@ -52,7 +51,7 @@ export class PostItemComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        alert('like error!');
+        alert(err.error.errors.join('\n'));
         console.error(err);
       }
     })

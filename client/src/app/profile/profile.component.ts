@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           }
         },
         error: (err) => {
-          alert('User details fetching error!');
+          alert(err.error.errors.join('\n'));
           console.error(err);
         }
       })
@@ -95,12 +95,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        alert('Follow error');
+        alert(err.error.errors.join('\n'));
         console.error(err);
       }
     });
   }
-  
+
   toggleConnVisible() {
     this.connectionsVisible = !this.connectionsVisible;
   }
