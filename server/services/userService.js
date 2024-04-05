@@ -69,7 +69,7 @@ async function getUserById(id) {
         .select(['_id', 'firstName', 'lastName', 'profilePic', 'posts', 'connections'])
         .populate({
             path: 'posts',
-            options: { sort: { createdAt: -1 }, limit: 3 },
+            options: { sort: { createdAt: -1 } },
             populate: [
                 {
                     path: 'likes',

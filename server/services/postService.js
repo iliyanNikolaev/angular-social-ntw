@@ -27,7 +27,6 @@ async function getLastPostsByUserId(skip, userId) {
     const posts = await Post.find({ owner: userId })
         .sort({ createdAt: -1 })
         .skip(skip)
-        .limit(3)
         .populate({
             path: 'likes',
             select: '_id firstName lastName profilePic'
