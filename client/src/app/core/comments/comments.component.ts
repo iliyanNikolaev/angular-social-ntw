@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentService } from 'src/app/comment.service';
 import { AuthService } from 'src/app/auth.service';
 import { PopulatedComment } from 'src/app/types/PopulatedComment';
@@ -14,6 +14,7 @@ import { AuthData } from 'src/app/types/AuthData';
 export class CommentsComponent implements OnInit {
   @Input() comments: PopulatedComment[] = [];
   @Input() postId: string = '';
+  @Output() removeCommentFromPostState: EventEmitter<string> = new EventEmitter<string>();
   authData: AuthData | null = null;
   private authDataSubscription: Subscription | undefined;
   private createCommentSubscription: Subscription | undefined;
@@ -51,7 +52,8 @@ export class CommentsComponent implements OnInit {
   deleteComment(commentId: string) {
     this.deleteCommentSubscription = this.sComment.deleteComment(commentId).subscribe({
       next: () => {
-        this.comments = this.comments.filter(comment => comment._id !== commentId);
+        this.comments = this.comments.filter(comment => comment._id != commentId);
+        this.removeCommentFromPostState.emit(commentId);
       },
       error: (err) => {
         alert('delete comment error');

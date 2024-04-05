@@ -51,7 +51,13 @@
 .postImg:hover{
     opacity: 0.8;
 }
-
+.postContent {
+    font-weight: 450;
+    font-size: large;
+}
+.postContent:hover{
+    cursor: pointer;
+}
 .lower{
     display: flex;
     flex-direction: column;

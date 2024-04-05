@@ -31,7 +31,11 @@ export class PostDetailsComponent implements OnInit {
       })
     });
   }
-
+  removeCommentFromPostState(commentId: string) {
+    if (this.post) {
+      this.post.comments = this.post.comments.filter(x => x._id !== commentId);
+    }
+  }
   showComments() {
     this.commentsVisible = true;
     this.likesVisible = false;

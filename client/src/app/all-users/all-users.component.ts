@@ -20,6 +20,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   constructor(private sUser: UserService, private sAuth: AuthService) { }
 
   ngOnInit(): void {
+    this.getAuthData();
     this.getAllUsers();
   }
 
@@ -35,8 +36,13 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  getAuthData() {
+    this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
+      this.authData = data;
+    });
+  }
   ngOnDestroy(): void {
-    this.usersSubscription.unsubscribe();
+    this.usersSubscription?.unsubscribe();
+    this.authDataSubscription?.unsubscribe();
   }
 }

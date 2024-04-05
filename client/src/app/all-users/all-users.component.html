@@ -1,13 +1,15 @@
 <div class="wrapper" appScroll>
     <div class="container">
         <h1 class="heading">all users in social-ntw</h1>
-        <input class="input" type="text" placeholder='Search by name...' />
-        <button class="btn"><i class="fas fa-search"> search</i></button>
 
         <div class="userContainer" *ngFor="let user of users">
-            <img class="avatar" src="{{user.profilePic}}" alt="avatar" />
-            <span class="username" routerLink="/profile/{{user._id}}">{{user.firstName}} {{user.lastName}}</span> <i class="fas fa-link connectIcon">connect</i>
+            <ng-container *ngIf="user._id != authData?._id">
+                <img class="avatar" src="{{user.profilePic}}" alt="avatar" />
+                <span class="username" routerLink="/profile/{{user._id}}">{{user.firstName}} {{user.lastName}}</span> <i
+                    class="fas fa-link connectIcon" *ngIf="authData">connect</i>
+            </ng-container>
+
         </div>
-        
+
     </div>
 </div>
