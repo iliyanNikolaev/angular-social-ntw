@@ -24,7 +24,7 @@
             </div>
 
             <div class="ownerIcons" *ngIf="authData && authData._id == post?.owner?._id">
-                <i class="fas fa-edit editIcon">Edit</i>
+                <i class="fas fa-edit editIcon" routerLink="/post/edit/{{post?._id}}">Edit</i>
                 <i class="fas fa-trash-alt deleteIcon">Delete</i>
             </div>
         </div>

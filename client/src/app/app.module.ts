@@ -14,6 +14,8 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { authInterceptorProvider } from './auth.interceptor';
 import { ScrollDirective } from './scroll.directive';
 import { FormsModule } from '@angular/forms';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     PostDetailsComponent,
-    ScrollDirective
+    ScrollDirective,
+    EditPostComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

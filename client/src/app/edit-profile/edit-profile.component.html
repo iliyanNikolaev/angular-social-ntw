@@ -1,0 +1,55 @@
+<div class="wrapper" appScroll>
+    <div class="container">
+        <form class="editProfileForm" #registerForm="ngForm">
+            <p class="heading">edit profile</p>
+            <div class="inputContainer">
+                <i class="fas fa-at icon"></i>
+                <input name="email" class="input" type="email" placeholder='email' ngModel required #emailInput="ngModel" />
+            </div>
+
+            <div class="inputContainer">
+                <i class="fas fa-signature icon"></i>
+                <input name="firstName" class="input" type="text" placeholder='first name' ngModel required #firstNameInput="ngModel" />
+            </div>
+
+            <div class="inputContainer">
+                <i class="fas fa-signature icon"></i>
+                <input name="lastName" class="input" type="text" placeholder='last name' ngModel required #lastNameInput="ngModel" />
+            </div>
+            
+            <div class="photoContainer form-group" accept="image/*" ngModel
+              #imageInput="ngModel">
+              <!-- <span class="photoSpan" >add picture</span> -->
+              <span class="photoSpan" >added</span>
+              <div *ngIf="imageInput.touched">
+                <span *ngIf="imageInput.errors?.['invalidImage']">
+                  Please select a valid image file
+                </span>
+              </div>
+              <label for='file' class="addFile form-group">
+                <div class="addFileBtn">
+                  <i class="fas fa-images addVisible"></i>
+                </div>
+                <input id="file" class="addHidden" type="file"  />
+              </label>
+            </div>
+
+            <button class="btn" [disabled]="registerForm.invalid">edit</button>
+
+            <div *ngIf="registerForm.invalid" class="errorsCont">
+                <p *ngIf="emailInput.touched && emailInput.errors?.['required']">
+                    Email is required
+                </p>
+                <p *ngIf="emailInput.touched && emailInput.errors?.['email']">
+                    Invalid email format
+                </p>
+                <p *ngIf="firstNameInput.touched && firstNameInput.errors?.['required']">
+                    First name is required
+                </p>
+                <p *ngIf="lastNameInput.touched && lastNameInput.errors?.['required']">
+                    Last name is required
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="wrapper" appScroll>
+    <div class="container">
+        <form class="create-post-container" #createPostForm="ngForm" >
+            <p class="heading">Edit post</p>
+            <textarea name="textContent" class="text" rows="2" ngModel required #textContentInput="ngModel"></textarea>
+            <div *ngIf="textContentInput.touched">
+              <span *ngIf="textContentInput.errors?.['required']">
+                post text content cannot be a empty string
+              </span>
+            </div>
+            <div class="photoContainer form-group" accept="image/*" ngModel
+              #imageInput="ngModel">
+              <!-- <span class="photoSpan" >add picture</span> -->
+              <span class="photoSpan" >added</span>
+              <div *ngIf="imageInput.touched">
+                <span *ngIf="imageInput.errors?.['invalidImage']">
+                  Please select a valid image file
+                </span>
+              </div>
+              <label for='file' class="addFile form-group">
+                <div class="addFileBtn">
+                  <i class="fas fa-images addVisible"></i>
+                </div>
+                <input id="file" class="addHidden" type="file"  />
+              </label>
+            </div>
+
+            <button [disabled]="createPostForm.invalid" class="btn">edit</button>
+            <app-spinner  />
+          </form>
+    </div>
+</div>
