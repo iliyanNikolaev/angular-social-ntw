@@ -119,7 +119,27 @@
     align-items: center;
     gap: 0.2rem;
 }
+.connsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.conn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
+.connAvatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.connFullName {
+    font-weight: bold;
+}
 
 @media only screen and (min-width: 1200px) {
     .cover{

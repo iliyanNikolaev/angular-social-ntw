@@ -47,7 +47,10 @@ export class CreatePostComponent {
           form.reset();
           this.isLoading = false;
         },
-        error: (err) => console.error
+        error: (err) => {
+          alert(err.error.errors.join('\n'));
+          console.error(err)
+        } 
       });
     }
   }

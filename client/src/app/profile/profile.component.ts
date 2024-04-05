@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   authData: AuthData | null = null;
   isOwnProfile: boolean = false;
   isFollower: boolean = false;
+  connectionsVisible: boolean = false;
   private routeParamsSubscription: Subscription = new Subscription();
   private getUserSubscription: Subscription = new Subscription();
   private authDataSubscription: Subscription = new Subscription();
@@ -100,6 +101,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
   
+  toggleConnVisible() {
+    this.connectionsVisible = !this.connectionsVisible;
+  }
+
   ngOnDestroy(): void {
     this.routeParamsSubscription.unsubscribe();
     this.getUserSubscription.unsubscribe();

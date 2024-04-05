@@ -31,7 +31,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         this.usersLoading = false;
       },
       error: (err) => {
-        alert('User details fetching error!');
+        alert(err.error.errors.join('\n'));
         console.error(err);
       }
     });

@@ -11,9 +11,15 @@
         </div>
         <div class="lower">
             <div class="controls">
-                <span class="connectionsBtn">
+                <span class="connectionsBtn connectionsDropdown" (click)="toggleConnVisible()">
                     {{user.connections.length}} connections
                 </span>
+                <div class="connsContainer" *ngIf="connectionsVisible">
+                    <div class="conn" *ngFor="let conn of user.connections">
+                        <img class="connAvatar" src="{{conn.profilePic}}" alt="avatar" />
+                        <span class="connFullName">{{conn.firstName}} {{conn.lastName}}</span>
+                    </div>
+                </div>
                 <button class="btn" *ngIf="authData && !isOwnProfile">
                     <i class="fas fa-link" *ngIf="!isOwnProfile && !isFollower" (click)="toggleConnect(user._id)"> connect</i>
                     <i class="fas fa-link" *ngIf="isFollower" (click)="toggleConnect(user._id)"> disconnect</i>

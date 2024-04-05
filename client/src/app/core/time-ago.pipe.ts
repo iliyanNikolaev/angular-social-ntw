@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'timeAgo'
 })
 export class TimeAgoPipe implements PipeTransform {
-
   transform(timestamp: string): string {
     const date: Date = new Date(timestamp);
     const now: Date = new Date();
@@ -14,7 +13,6 @@ export class TimeAgoPipe implements PipeTransform {
     const minutes: number = Math.floor(seconds / 60);
     const hours: number = Math.floor(minutes / 60);
     const days: number = Math.floor(hours / 24);
-
     if (days > 7) {
       return date.toDateString();
     } else if (days > 0) {

@@ -44,7 +44,8 @@ export class CommentsComponent implements OnInit {
         form.reset();
       },
       error: (err) => {
-        alert('post comment error')
+        alert(err.error.errors.join('\n'));
+        console.error(err)
       }
     })
   }
@@ -56,7 +57,8 @@ export class CommentsComponent implements OnInit {
         this.removeCommentFromPostState.emit(commentId);
       },
       error: (err) => {
-        alert('delete comment error');
+        alert(err.error.errors.join('\n'));
+        console.error(err);
       }
     });
   }

@@ -25,7 +25,7 @@ export class PostDetailsComponent implements OnInit {
           this.postLoading = false;
         },
         error: (err) => {
-          alert('Posts details fetching error!');
+          alert(err.error.errors.join('\n'));
           console.error(err); 
         }
       })

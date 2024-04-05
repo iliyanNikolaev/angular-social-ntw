@@ -23,7 +23,10 @@ export class LoginComponent {
         form.reset();
         this.router.navigate(['/home']);
       },
-      error: console.error
+      error: (err) => {
+        alert(err.error.errors.join('\n'))
+        console.error(err)
+      }
     })
   }
 }
