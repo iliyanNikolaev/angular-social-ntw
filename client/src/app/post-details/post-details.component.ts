@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../types/Post';
 import { PostService } from '../post.service';
 import { AuthData } from '../types/AuthData';
@@ -19,7 +19,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   commentsVisible: boolean = false;
   authData: AuthData | null = null;
   private authDataSubscription: Subscription | undefined;
-  constructor(private route: ActivatedRoute, private sPost: PostService, private sAuth: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private sPost: PostService, private sAuth: AuthService) { }
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
@@ -54,7 +54,20 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     this.commentsVisible = false;
     this.likesVisible = true;
   }
-
+  onDelete(postId: string) {
+    const choice = confirm('Are you sure?');
+    if(choice) {
+      this.sPost.deletePost(postId).subscribe({
+        next: () => {
+          this.router.navigate(['/profile/'+this.authData?._id]);
+        },
+        error: (err) => {
+          alert(err.error.errors.join('\n'));
+          console.error(err); 
+        }
+      });
+    }
+  }
   ngOnDestroy(): void {
     this.authDataSubscription?.unsubscribe();
   }

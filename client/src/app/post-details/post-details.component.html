@@ -25,7 +25,7 @@
 
             <div class="ownerIcons" *ngIf="authData && authData._id == post?.owner?._id">
                 <i class="fas fa-edit editIcon" routerLink="/post/edit/{{post?._id}}">Edit</i>
-                <i class="fas fa-trash-alt deleteIcon">Delete</i>
+                <i class="fas fa-trash-alt deleteIcon" (click)="onDelete(post?._id!)">Delete</i>
             </div>
         </div>
         <app-likes *ngIf="likesVisible" [likes]="post?.likes!"/>
