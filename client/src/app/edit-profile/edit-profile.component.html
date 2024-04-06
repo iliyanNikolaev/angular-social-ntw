@@ -1,26 +1,26 @@
 <div class="wrapper" appScroll>
     <div class="container">
-        <form class="editProfileForm" #registerForm="ngForm">
+        <form class="editProfileForm" #editProfileForm="ngForm" (submit)="submitForm(editProfileForm)">
             <p class="heading">edit profile</p>
             <div class="inputContainer">
                 <i class="fas fa-at icon"></i>
-                <input name="email" class="input" type="email" placeholder='email' ngModel required #emailInput="ngModel" />
+                <input name="email" class="input" type="email" placeholder='email' ngModel="{{user?.email}}" required #emailInput="ngModel" />
             </div>
 
             <div class="inputContainer">
                 <i class="fas fa-signature icon"></i>
-                <input name="firstName" class="input" type="text" placeholder='first name' ngModel required #firstNameInput="ngModel" />
+                <input name="firstName" class="input" type="text" placeholder='first name' ngModel="{{user?.firstName}}" required #firstNameInput="ngModel" />
             </div>
 
             <div class="inputContainer">
                 <i class="fas fa-signature icon"></i>
-                <input name="lastName" class="input" type="text" placeholder='last name' ngModel required #lastNameInput="ngModel" />
+                <input name="lastName" class="input" type="text" placeholder='last name' ngModel="{{user?.lastName}}" required #lastNameInput="ngModel" />
             </div>
             
-            <div class="photoContainer form-group" accept="image/*" ngModel
-              #imageInput="ngModel">
-              <!-- <span class="photoSpan" >add picture</span> -->
-              <span class="photoSpan" >added</span>
+            <div class="photoContainer form-group" (change)="onFileSelected($event)" accept="image/*" ngModel
+            #imageInput="ngModel">
+              <span class="photoSpan" >add picture</span>
+              <!-- <span class="photoSpan" >added</span> -->
               <div *ngIf="imageInput.touched">
                 <span *ngIf="imageInput.errors?.['invalidImage']">
                   Please select a valid image file
@@ -34,9 +34,9 @@
               </label>
             </div>
 
-            <button class="btn" [disabled]="registerForm.invalid">edit</button>
+            <button class="btn" [disabled]="editProfileForm.invalid">edit</button>
 
-            <div *ngIf="registerForm.invalid" class="errorsCont">
+            <div *ngIf="editProfileForm.invalid" class="errorsCont">
                 <p *ngIf="emailInput.touched && emailInput.errors?.['required']">
                     Email is required
                 </p>

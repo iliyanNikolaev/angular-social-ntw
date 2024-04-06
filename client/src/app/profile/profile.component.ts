@@ -13,7 +13,7 @@ import { AuthData } from '../types/AuthData';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   userId: string = '';
-  user: User = { _id: '', firstName: '', lastName: '', connections: [], posts: [], profilePic: '' };
+  user: User = { email: '', _id: '', firstName: '', lastName: '', connections: [], posts: [], profilePic: '' };
   profileLoading: boolean = true;
   authData: AuthData | null = null;
   isOwnProfile: boolean = false;

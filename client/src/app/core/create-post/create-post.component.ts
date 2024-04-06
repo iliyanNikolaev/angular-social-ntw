@@ -26,7 +26,6 @@ export class CreatePostComponent {
       form.controls['image'].setErrors({ 'invalidImage': true });
       this.isLoading = false;
     } else if (this.selectedFile && this.selectedFile.type.startsWith('image')) {
-      console.log('img');
       this.sCloudinary.uploadImage(this.selectedFile).subscribe({
         next: (response) => {
           this.sPost.createPost({ textContent: form.value['textContent'], picture: response }).subscribe({
@@ -36,10 +35,16 @@ export class CreatePostComponent {
               this.selectedFile = null;
               this.isLoading = false;
             },
-            error: console.error
+            error: (err) => {
+              alert(err.error.errors.join('\n'));
+              console.error(err)
+            } 
           });
         },
-        error: console.error
+        error: (err) => {
+          alert(err.error.errors.join('\n'));
+          console.error(err)
+        } 
       })
     } else if (this.selectedFile == null) {
       this.sPost.createPost({ textContent: form.value['textContent'] }).subscribe({

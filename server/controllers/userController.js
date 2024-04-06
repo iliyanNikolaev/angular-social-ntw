@@ -152,10 +152,4 @@ function editProfileDto(req) {
             throw new Error('The lastName should be between 2 and 20 characters long');
         }
     }
-    if(req.body.profilePic){
-        const pattern = /^https:\/\/res\.cloudinary\.com\//;
-        if(!pattern.test(req.body.profilePic)){
-            throw new Error('Invalid image');
-        }
-    }
 }

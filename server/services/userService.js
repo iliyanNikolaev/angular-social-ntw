@@ -66,7 +66,7 @@ async function getAllUsers() {
 
 async function getUserById(id) {
     const user = await User.findById(id)
-        .select(['_id', 'firstName', 'lastName', 'profilePic', 'posts', 'connections'])
+        .select(['email', '_id', 'firstName', 'lastName', 'profilePic', 'posts', 'connections'])
         .populate({
             path: 'posts',
             options: { sort: { createdAt: -1 } },

@@ -21,11 +21,11 @@ export class HomeComponent implements OnInit {
   constructor(private sPost: PostService, private sAuth: AuthService) { }
 
   ngOnInit(): void {
-   this.getAuthData();
-   this.getPosts(); 
+    this.getAuthData();
+    this.getPosts();
   }
-    onPostCreated(newPost: Post) {
-    this.posts.unshift(newPost); 
+  onPostCreated(newPost: Post) {
+    this.posts.unshift(newPost);
   }
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         alert(err.error.errors.join('\n'));
-       console.error(err); 
+        console.error(err);
       }
     })
   }
