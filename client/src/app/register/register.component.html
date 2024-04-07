@@ -6,7 +6,7 @@
 
             <div class="inputContainer">
                 <i class="fas fa-at icon"></i>
-                <input name="email" class="input" type="email" placeholder='email' ngModel required #emailInput="ngModel" />
+                <input name="email" class="input" type="email" placeholder='email' ngModel required email #emailInput="ngModel" />
             </div>
 
             <div class="inputContainer">
@@ -36,7 +36,7 @@
                     Email is required
                 </p>
                 <p *ngIf="emailInput.touched && emailInput.errors?.['email']" class="error">
-                    Invalid email format
+                    Email must be in correct format
                 </p>
                 <p *ngIf="firstNameInput.touched && firstNameInput.errors?.['required']" class="error">
                     First name is required

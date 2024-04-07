@@ -10,14 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private sUser: UserService, private sAuth: AuthService, private router: Router) {}
+  constructor(private sUser: UserService, private sAuth: AuthService, private router: Router) { }
 
   registerSubmit(form: NgForm) {
     if (form.invalid) {
       return alert('Invalid registration data!');
     }
-``  
-const { email, firstName, lastName, password, repeat } = form.value;
+    const { email, firstName, lastName, password, repeat } = form.value;
 
     if (password !== repeat) {
       return alert('Passwords do not match!');

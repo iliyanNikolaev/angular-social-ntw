@@ -12,7 +12,7 @@
             </div>
             <button class="btn" [disabled]="loginForm.invalid">login</button>
                 <p *ngIf="emailInput.touched && emailInput.errors?.['email']" class="error">
-                    this input must be in email format
+                    Email must be in correct format
                 </p>
                 <p *ngIf="emailInput.touched && emailInput.errors?.['required']" class="error">
                     email cannot be a empty string
