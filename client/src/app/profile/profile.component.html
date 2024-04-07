@@ -2,8 +2,8 @@
     <app-spinner *ngIf="profileLoading"/>
     <div class="container" *ngIf="user && !profileLoading">
         <div class="upper">
-            <div class="editIconContainer" routerLink="/profile/edit/{{authData?._id}}">
-                <i class="fas fa-user-edit editIcon" *ngIf="authData"></i>
+            <div class="editIconContainer" routerLink="/profile/edit/{{authData._id}}" *ngIf="authData && authData._id == user._id">
+                <i class="fas fa-user-edit editIcon"></i>
             </div>
             <img class="cover" src="assets/cover.png" alt="cover" />
             <img class="avatar" src="{{user.profilePic}}" alt="avatar" />

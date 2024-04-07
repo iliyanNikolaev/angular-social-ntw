@@ -9,6 +9,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { NotAuthGuard } from './not-auth.guard';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { OwnerPostGuard } from './owner-post.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'post/:id', component: PostDetailsComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'users', component: AllUsersComponent },
-  { path: 'post/edit/:id', component: EditPostComponent},
+  { path: 'post/edit/:id', component: EditPostComponent, canActivate: [OwnerPostGuard]},
   { path: 'profile/edit/:id', component: EditProfileComponent},
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] }
