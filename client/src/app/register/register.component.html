@@ -31,26 +31,26 @@
 
             <button class="btn" [disabled]="registerForm.invalid">register</button>
 
-            <div *ngIf="registerForm.invalid" class="errorsCont">
-                <p *ngIf="emailInput.touched && emailInput.errors?.['required']">
+            <div *ngIf="registerForm.invalid">
+                <p *ngIf="emailInput.touched && emailInput.errors?.['required']" class="error">
                     Email is required
                 </p>
-                <p *ngIf="emailInput.touched && emailInput.errors?.['email']">
+                <p *ngIf="emailInput.touched && emailInput.errors?.['email']" class="error">
                     Invalid email format
                 </p>
-                <p *ngIf="firstNameInput.touched && firstNameInput.errors?.['required']">
+                <p *ngIf="firstNameInput.touched && firstNameInput.errors?.['required']" class="error">
                     First name is required
                 </p>
-                <p *ngIf="lastNameInput.touched && lastNameInput.errors?.['required']">
+                <p *ngIf="lastNameInput.touched && lastNameInput.errors?.['required']" class="error">
                     Last name is required
                 </p>
-                <p *ngIf="passwordInput.touched && passwordInput.errors?.['required']">
+                <p *ngIf="passwordInput.touched && passwordInput.errors?.['required']" class="error">
                     Password is required
                 </p>
-                <p *ngIf="repeatPasswordInput.touched && repeatPasswordInput.errors?.['required']">
+                <p *ngIf="repeatPasswordInput.touched && repeatPasswordInput.errors?.['required']" class="error">
                     Repeat password is required
                 </p>
-                <p *ngIf="repeatPasswordInput.touched && passwordInput.value !== repeatPasswordInput.value">
+                <p *ngIf="repeatPasswordInput.touched && passwordInput.value !== repeatPasswordInput.value" class="error">
                     Passwords do not match
                 </p>
             </div>

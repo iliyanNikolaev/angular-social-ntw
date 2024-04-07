@@ -2,7 +2,7 @@
   <p class="heading">Add new post</p>
   <textarea name="textContent" class="text" rows="2" ngModel required #textContentInput="ngModel"></textarea>
   <div *ngIf="textContentInput.touched">
-    <span *ngIf="textContentInput.errors?.['required']">
+    <span *ngIf="textContentInput.errors?.['required']" class="error">
       post text content cannot be a empty string
     </span>
   </div>
@@ -11,7 +11,7 @@
     <span class="photoSpan" *ngIf="!selectedFile">add picture</span>
     <span class="photoSpan" *ngIf="selectedFile">added</span>
     <div *ngIf="imageInput.touched">
-      <span *ngIf="imageInput.errors?.['invalidImage']">
+      <span *ngIf="imageInput.errors?.['invalidImage']" class="error">
         Please select a valid image file
       </span>
     </div>

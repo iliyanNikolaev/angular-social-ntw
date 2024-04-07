@@ -4,7 +4,7 @@
             <p class="heading">Edit post</p>
             <textarea name="textContent" class="text" rows="2" ngModel="{{currPost?.textContent}}" required #textContentInput="ngModel"></textarea>
             <div *ngIf="textContentInput.touched">
-              <span *ngIf="textContentInput.errors?.['required']">
+              <span *ngIf="textContentInput.errors?.['required']" class="error">
                 post text content cannot be a empty string
               </span>
             </div>

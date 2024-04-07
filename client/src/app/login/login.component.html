@@ -11,13 +11,13 @@
                 <input name="password" class="input" type="password" placeholder='password' ngModel required #passwordInput="ngModel"/>
             </div>
             <button class="btn" [disabled]="loginForm.invalid">login</button>
-                <p *ngIf="emailInput.touched && emailInput.errors?.['email']">
+                <p *ngIf="emailInput.touched && emailInput.errors?.['email']" class="error">
                     this input must be in email format
                 </p>
-                <p *ngIf="emailInput.touched && emailInput.errors?.['required']">
+                <p *ngIf="emailInput.touched && emailInput.errors?.['required']" class="error">
                     email cannot be a empty string
                 </p>
-                <p *ngIf="passwordInput.touched && passwordInput.errors?.['required']">
+                <p *ngIf="passwordInput.touched && passwordInput.errors?.['required']" class="error">
                     password cannot be empty string
                 </p>
         </form>

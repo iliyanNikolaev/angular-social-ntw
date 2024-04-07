@@ -23,7 +23,7 @@
                         #commentInput="ngModel" />
                 </div>
 
-                <p *ngIf="commentInput.touched && commentInput.errors?.['required']">
+                <p *ngIf="commentInput.touched && commentInput.errors?.['required']" class="error">
                     comment cannot be empty string
                 </p>
 
