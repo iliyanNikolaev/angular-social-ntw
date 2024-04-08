@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Post } from '../types/Post';
 import { PostService } from '../post.service';
+import { AuthService } from '../auth.service';
+import { AuthData } from '../types/AuthData';
 
 @Component({
   selector: 'app-edit-post',
@@ -11,21 +13,26 @@ import { PostService } from '../post.service';
   styleUrls: ['./edit-post.component.css']
 })
 export class EditPostComponent implements OnInit {
-  private authDataSubscription: Subscription | undefined;
+  authData: AuthData | null = null;
   currPost: Post | null = null;
   paramId: string = '';
   isLoading: boolean = false;
-
-  constructor(private router: Router, private route: ActivatedRoute, private sPost: PostService) {
+  
+  private authDataSubscription: Subscription | undefined;
+  constructor(private router: Router, private route: ActivatedRoute, private sPost: PostService, private sAuth: AuthService) {
 
   }
 
   ngOnInit(): void {
+    this.getAuthData();
     this.route.params.subscribe(params => {
       this.paramId = params['id'];
       this.sPost.getPostDetails(this.paramId).subscribe({
         next: (post) => {
           this.currPost = post;
+          if(post.owner._id != this.authData?._id) {
+            this.router.navigate(['/']);
+          }
         },
         error: (err) => {
           alert(err.error.errors.join('\n'));
@@ -34,7 +41,14 @@ export class EditPostComponent implements OnInit {
       });
     });
   }
-
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
+  }
+  getAuthData() {
+    this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
+      this.authData = data;
+    });
+  }
   formSubmit(form: NgForm){
     if (form.invalid) {
       return alert('invalid form');
@@ -49,8 +63,5 @@ export class EditPostComponent implements OnInit {
         console.error(err); 
       }
     });
-  }
-  ngOnDestroy(): void {
-    this.authDataSubscription?.unsubscribe();
   }
 }
