@@ -45,6 +45,9 @@ export class EditProfileComponent {
         this.userSubscription = this.sUser.getUserById(this.paramId).subscribe({
           next: (user) => {
             this.user = user;
+            if(this.user?._id != this.authData?._id){
+              this.router.navigate(['/home']);
+            }
           }, 
           error: (err) => {
             alert(err.error.errors.join('\n'));
