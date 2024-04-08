@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private routeParamsSubscription: Subscription = new Subscription();
   private getUserSubscription: Subscription = new Subscription();
   private authDataSubscription: Subscription = new Subscription();
+  private connectUserSubscription: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute, private sUser: UserService, private sAuth: AuthService) { }
 
@@ -38,7 +39,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     }
   }
-  
+  ngOnDestroy(): void {
+    this.routeParamsSubscription?.unsubscribe();
+    this.getUserSubscription?.unsubscribe();
+    this.authDataSubscription?.unsubscribe();
+    this.connectUserSubscription?.unsubscribe();
+  }
   initProfile() {
     this.routeParamsSubscription = this.route.params.subscribe(params => {
       this.userId = params['id'];
@@ -77,7 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   toggleConnect(id: string) {
-    this.sUser.connectUser(id).subscribe({
+    this.connectUserSubscription = this.sUser.connectUser(id).subscribe({
       next: () => {
         const conn = {
           _id: this.authData?._id || '',
@@ -103,11 +109,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   toggleConnVisible() {
     this.connectionsVisible = !this.connectionsVisible;
-  }
-
-  ngOnDestroy(): void {
-    this.routeParamsSubscription.unsubscribe();
-    this.getUserSubscription.unsubscribe();
-    this.authDataSubscription.unsubscribe();
   }
 }

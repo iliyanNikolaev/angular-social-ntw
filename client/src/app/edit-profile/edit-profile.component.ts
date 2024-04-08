@@ -19,16 +19,30 @@ export class EditProfileComponent {
   user: User | null = null;
   selectedFile: File | null = null;
   private authDataSubscription: Subscription | undefined;
+  private paramsSubscription: Subscription | undefined;
+  private userSubscription: Subscription | undefined;
+  private cloudinarySubscription: Subscription | undefined;
+  private editUserSubscription: Subscription | undefined;
   constructor(private router: Router, private route: ActivatedRoute, private sUser: UserService, private sCloudinary: CloudinaryService, private sAuth: AuthService) {
 
   }
 
   ngOnInit(): void {
     this.getAuthData();
-    this.route.params.subscribe(params => {
+    this.getUser();
+  }
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
+    this.paramsSubscription?.unsubscribe();
+    this.userSubscription?.unsubscribe();
+    this.cloudinarySubscription?.unsubscribe();
+    this.editUserSubscription?.unsubscribe();
+  }
+  getUser() {
+    this.paramsSubscription = this.route.params.subscribe(params => {
       this.paramId = params['id'];
       if(this.paramId != null){
-        this.sUser.getUserById(this.paramId).subscribe({
+        this.userSubscription = this.sUser.getUserById(this.paramId).subscribe({
           next: (user) => {
             this.user = user;
           }, 
@@ -40,7 +54,6 @@ export class EditProfileComponent {
       }
     });
   }
-  
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
@@ -53,10 +66,10 @@ export class EditProfileComponent {
     if (this.selectedFile && !(this.selectedFile.type.startsWith('image'))) {
       form.controls['image'].setErrors({ 'invalidImage': true });
     } else if (this.selectedFile && this.selectedFile.type.startsWith('image')) {
-      this.sCloudinary.uploadImage(this.selectedFile).subscribe({
+      this.cloudinarySubscription = this.sCloudinary.uploadImage(this.selectedFile).subscribe({
         next: (response) => {
           if(this.user?._id){
-            this.sUser.editUser(this.user._id, { ...form.value, profilePic: response}).subscribe({
+            this.editUserSubscription = this.sUser.editUser(this.user._id, { ...form.value, profilePic: response}).subscribe({
               next: () => {
                 this.router.navigate(['/profile/'+this.user?._id]);
               },
@@ -74,7 +87,7 @@ export class EditProfileComponent {
       })
     } else if (this.selectedFile == null) {
       if(this.user?._id){
-        this.sUser.editUser(this.user._id, { ...form.value}).subscribe({
+        this.editUserSubscription = this.sUser.editUser(this.user._id, { ...form.value}).subscribe({
           next: () => {
             this.router.navigate(['/profile/'+this.user?._id]);
           },
@@ -88,8 +101,5 @@ export class EditProfileComponent {
   }
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-  }
-  ngOnDestroy(): void {
-    this.authDataSubscription?.unsubscribe();
   }
 }

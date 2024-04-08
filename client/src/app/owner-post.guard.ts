@@ -1,7 +1,5 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Router, CanActivate, ActivatedRoute } from '@angular/router';
-import { AuthService } from './auth.service';
-import { AuthData } from './types/AuthData';
 import { Subscription } from 'rxjs';
 import { PostService } from './post.service';
 import { Post } from './types/Post';
@@ -17,7 +15,7 @@ export class OwnerPostGuard implements CanActivate, OnInit, OnDestroy {
 
     constructor(private router: Router, private route: ActivatedRoute, private sPost: PostService) { }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.getRouteId();
         this.getPost();
     }
@@ -26,13 +24,14 @@ export class OwnerPostGuard implements CanActivate, OnInit, OnDestroy {
         this.getPostSubscription?.unsubscribe();
     }
     
-    canActivate() {
+    async canActivate() {
         const currentUserId = localStorage.getItem('_id');
         if (!currentUserId || !this.reqId || !this.post) {
             this.router.navigate(['/home']);
             return false;
         }
         if(currentUserId !== this.post.owner._id){
+            console.log('not owner')
             this.router.navigate(['/home']);
             return false;
         }

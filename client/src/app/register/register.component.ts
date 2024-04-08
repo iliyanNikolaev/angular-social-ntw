@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
+  private registerSubscription: Subscription = new Subscription();
   constructor(private sUser: UserService, private sAuth: AuthService, private router: Router) { }
-
+  ngOnDestroy(): void {
+    this.registerSubscription?.unsubscribe();
+  }
   registerSubmit(form: NgForm) {
     if (form.invalid) {
       return alert('Invalid registration data!');
@@ -22,7 +26,7 @@ export class RegisterComponent {
       return alert('Passwords do not match!');
     }
 
-    this.sUser.register(email, password, firstName, lastName).subscribe({
+    this.registerSubscription = this.sUser.register(email, password, firstName, lastName).subscribe({
       next: (userData) => {
         this.sAuth.setAuthData(userData);
         form.reset();

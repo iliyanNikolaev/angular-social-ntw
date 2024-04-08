@@ -24,6 +24,10 @@ export class HomeComponent implements OnInit {
     this.getAuthData();
     this.getPosts();
   }
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
+    this.postsDataSubscription?.unsubscribe();
+  }
   onPostCreated(newPost: Post) {
     this.posts.unshift(newPost);
   }
@@ -43,9 +47,5 @@ export class HomeComponent implements OnInit {
         console.error(err);
       }
     })
-  }
-  ngOnDestroy(): void {
-    this.authDataSubscription?.unsubscribe();
-    this.postsDataSubscription?.unsubscribe();
   }
 }

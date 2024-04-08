@@ -25,7 +25,10 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     this.getAuthData();
     this.getAllUsers();
   }
-
+  ngOnDestroy(): void {
+    this.usersSubscription?.unsubscribe();
+    this.authDataSubscription?.unsubscribe();
+  }
   getAllUsers(): void {
     this.usersSubscription = this.sUser.getAllUsers().subscribe({
       next: (users) => {
@@ -56,9 +59,5 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         user.lastName.toLowerCase().includes(lowerCaseSearch)
       );
     }
-  }
-  ngOnDestroy(): void {
-    this.usersSubscription?.unsubscribe();
-    this.authDataSubscription?.unsubscribe();
   }
 }

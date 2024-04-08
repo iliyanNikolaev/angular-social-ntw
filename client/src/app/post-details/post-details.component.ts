@@ -19,17 +19,27 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   commentsVisible: boolean = false;
   authData: AuthData | null = null;
   private authDataSubscription: Subscription | undefined;
+  private paramsSubscription: Subscription | undefined;
+  private postDetailsSubscription: Subscription | undefined;
   constructor(private router: Router, private route: ActivatedRoute, private sPost: PostService, private sAuth: AuthService) { }
+  ngOnInit(): void {
+    this.getAuthData();
+    this.getPostDetails();
+  }
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
+    this.paramsSubscription?.unsubscribe();
+    this.postDetailsSubscription?.unsubscribe();
+  }
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
     });
   }
-  ngOnInit(): void {
-    this.getAuthData();
-    this.route.params.subscribe(params => {
+  getPostDetails(){
+    this.paramsSubscription = this.route.params.subscribe(params => {
       this.postId = params['id'];
-      this.sPost.getPostDetails(this.postId).subscribe({
+      this.postDetailsSubscription = this.sPost.getPostDetails(this.postId).subscribe({
         next: (post) => {
           this.post = post;
           this.postLoading = false;
@@ -67,8 +77,5 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         }
       });
     }
-  }
-  ngOnDestroy(): void {
-    this.authDataSubscription?.unsubscribe();
   }
 }
