@@ -16,6 +16,7 @@ import { ScrollDirective } from './scroll.directive';
 import { FormsModule } from '@angular/forms';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     PostDetailsComponent,
     ScrollDirective,
     EditPostComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
