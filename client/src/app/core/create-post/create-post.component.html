@@ -9,7 +9,7 @@
   <div class="photoContainer form-group" (change)="onFileSelected($event)" accept="image/*" ngModel
     #imageInput="ngModel">
     <span class="photoSpan" *ngIf="!selectedFile">add picture</span>
-    <span class="photoSpan" *ngIf="selectedFile">added</span>
+    <span class="photoSpan added" *ngIf="selectedFile">added</span>
     <div *ngIf="imageInput.touched">
       <span *ngIf="imageInput.errors?.['invalidImage']" class="error">
         Please select a valid image file

@@ -64,7 +64,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
       return alert('invalid form');
     }
     this.isLoading = true;
-    this.sPost.editPost(this.paramId, form.value).subscribe({
+    this.editPostSubscription = this.sPost.editPost(this.paramId, form.value).subscribe({
       next: () => {
         this.router.navigate(['/post/'+this.paramId])
       },

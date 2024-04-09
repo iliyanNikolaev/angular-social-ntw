@@ -88,3 +88,9 @@
     margin-bottom: 0.2rem;
     padding-bottom: 0.1rem;
 }
+
+.added{
+    background-color: green;
+    color: black;
+    font-weight: bold;
+}

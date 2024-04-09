@@ -13,11 +13,13 @@ import { NgForm } from '@angular/forms';
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent implements OnInit, OnDestroy{
+export class EditProfileComponent implements OnInit, OnDestroy {
   authData: AuthData | null = null;
   paramId: string | null = null;
   user: User | null = null;
   selectedFile: File | null = null;
+  isLoading: boolean = false;
+
   private authDataSubscription: Subscription | undefined;
   private paramsSubscription: Subscription | undefined;
   private userSubscription: Subscription | undefined;
@@ -41,17 +43,17 @@ export class EditProfileComponent implements OnInit, OnDestroy{
   getUser() {
     this.paramsSubscription = this.route.params.subscribe(params => {
       this.paramId = params['id'];
-      if(this.paramId != null){
+      if (this.paramId != null) {
         this.userSubscription = this.sUser.getUserById(this.paramId).subscribe({
           next: (user) => {
             this.user = user;
-            if(this.user?._id != this.authData?._id){
+            if (this.user?._id != this.authData?._id) {
               this.router.navigate(['/home']);
             }
-          }, 
+          },
           error: (err) => {
             alert(err.error.errors.join('\n'));
-            console.error(err); 
+            console.error(err);
           }
         });
       }
@@ -62,41 +64,42 @@ export class EditProfileComponent implements OnInit, OnDestroy{
       this.authData = data;
     });
   }
-  submitForm(form: NgForm){
+  submitForm(form: NgForm) {
     if (form.invalid) {
       return alert('invalid form');
     }
+    this.isLoading = true;
     if (this.selectedFile && !(this.selectedFile.type.startsWith('image'))) {
       form.controls['image'].setErrors({ 'invalidImage': true });
     } else if (this.selectedFile && this.selectedFile.type.startsWith('image')) {
       this.cloudinarySubscription = this.sCloudinary.uploadImage(this.selectedFile).subscribe({
         next: (response) => {
-          if(this.user?._id){
-            this.editUserSubscription = this.sUser.editUser(this.user._id, { ...form.value, profilePic: response}).subscribe({
+          if (this.user?._id) {
+            this.editUserSubscription = this.sUser.editUser(this.user._id, { ...form.value, profilePic: response }).subscribe({
               next: () => {
-                this.router.navigate(['/profile/'+this.user?._id]);
+                this.router.navigate(['/profile/' + this.user?._id]);
               },
               error: (err) => {
                 alert(err.error.errors.join('\n'));
-                console.error(err); 
+                console.error(err);
               }
             })
           }
         },
-        error:(err) => {
+        error: (err) => {
           alert(err.error.errors.join('\n'));
-          console.error(err); 
+          console.error(err);
         }
       })
     } else if (this.selectedFile == null) {
-      if(this.user?._id){
-        this.editUserSubscription = this.sUser.editUser(this.user._id, { ...form.value}).subscribe({
+      if (this.user?._id) {
+        this.editUserSubscription = this.sUser.editUser(this.user._id, { ...form.value }).subscribe({
           next: () => {
-            this.router.navigate(['/profile/'+this.user?._id]);
+            this.router.navigate(['/profile/' + this.user?._id]);
           },
           error: (err) => {
             alert(err.error.errors.join('\n'));
-            console.error(err); 
+            console.error(err);
           }
         })
       }
