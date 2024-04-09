@@ -29,15 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initProfile();
     this.getAuthData();
-    if(this.authData?._id == this.user._id){
-      this.isOwnProfile = true;
-    } else {
-      for (let conn of this.user.connections) {
-        if(conn._id == this.authData?._id){
-          this.isFollower = true;
-        }
-      }
-    }
+    this.checkPostOwner();
   }
   ngOnDestroy(): void {
     this.routeParamsSubscription?.unsubscribe();
@@ -75,13 +67,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
       })
     });
   }
-
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
     });
   }
-
+  checkPostOwner(){
+    if(this.authData?._id == this.user._id){
+      this.isOwnProfile = true;
+    } else {
+      for (let conn of this.user.connections) {
+        if(conn._id == this.authData?._id){
+          this.isFollower = true;
+        }
+      }
+    }
+  }
   toggleConnect(id: string) {
     this.connectUserSubscription = this.sUser.connectUser(id).subscribe({
       next: () => {

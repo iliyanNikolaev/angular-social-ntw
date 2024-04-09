@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../types/Post';
 import { AuthData } from '../types/AuthData';
@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   posts: Post[] = []
   postListLoading: boolean = true;
   authData: AuthData | null = null;

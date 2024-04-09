@@ -20,16 +20,23 @@ export class PostItemComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAuthData();
-    for (const like of this.post.likes) {
-      if (like._id == this.authData?._id) {
-        this.postIsLikedByUser = true;
-      }
-    }
+    this.checkIfFollow();
+  }
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
+    this.toggleLikeSubscription?.unsubscribe();
   }
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
     });
+  }
+  checkIfFollow(){
+    for (const like of this.post.likes) {
+      if (like._id == this.authData?._id) {
+        this.postIsLikedByUser = true;
+      }
+    }
   }
   likePost() {
     this.toggleLikeSubscription = this.sPost.toggleLike(this.post._id).subscribe({
@@ -55,10 +62,5 @@ export class PostItemComponent implements OnInit, OnDestroy {
         console.error(err);
       }
     })
-  }
-
-  ngOnDestroy(): void {
-    this.authDataSubscription?.unsubscribe();
-    this.toggleLikeSubscription?.unsubscribe();
   }
 }

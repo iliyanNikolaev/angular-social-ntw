@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommentService } from 'src/app/comment.service';
 import { AuthService } from 'src/app/auth.service';
 import { PopulatedComment } from 'src/app/types/PopulatedComment';
@@ -11,7 +11,7 @@ import { AuthData } from 'src/app/types/AuthData';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css']
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit, OnDestroy {
   @Input() comments: PopulatedComment[] = [];
   @Input() postId: string = '';
   @Output() removeCommentFromPostState: EventEmitter<string> = new EventEmitter<string>();
@@ -25,7 +25,11 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAuthData();
   }
-
+  ngOnDestroy(): void {
+    this.authDataSubscription?.unsubscribe();
+    this.createCommentSubscription?.unsubscribe();
+    this.deleteCommentSubscription?.unsubscribe();
+  }
   getAuthData() {
     this.authDataSubscription = this.sAuth.getAuthDataObservable().subscribe((data) => {
       this.authData = data;
@@ -61,11 +65,5 @@ export class CommentsComponent implements OnInit {
         console.error(err);
       }
     });
-  }
-  
-  ngOnDestroy(): void {
-    this.authDataSubscription?.unsubscribe();
-    this.createCommentSubscription?.unsubscribe();
-    this.deleteCommentSubscription?.unsubscribe();
   }
 }

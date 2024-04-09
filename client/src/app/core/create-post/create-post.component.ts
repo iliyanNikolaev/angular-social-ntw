@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { CloudinaryService } from 'src/app/cloudinary.service';
 import { PostService } from 'src/app/post.service';
 import { AuthData } from 'src/app/types/AuthData';
@@ -10,13 +11,18 @@ import { Post } from 'src/app/types/Post';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css']
 })
-export class CreatePostComponent {
+export class CreatePostComponent implements OnDestroy {
   @Output() postCreated: EventEmitter<Post> = new EventEmitter<Post>();
   selectedFile: File | null = null;
   auth: AuthData | null = null;
   isLoading: boolean = false;
+  private cloudinarySubscription: Subscription | null = null;
+  private createPostSubscription: Subscription | null = null;
   constructor(private sCloudinary: CloudinaryService, private sPost: PostService) { }
-
+  ngOnDestroy(): void {
+    this.cloudinarySubscription?.unsubscribe();
+    this.createPostSubscription?.unsubscribe();
+  }
   createPostSubmit(form: NgForm) {
     if (form.invalid) {
       return alert('invalid form');
@@ -26,9 +32,9 @@ export class CreatePostComponent {
       form.controls['image'].setErrors({ 'invalidImage': true });
       this.isLoading = false;
     } else if (this.selectedFile && this.selectedFile.type.startsWith('image')) {
-      this.sCloudinary.uploadImage(this.selectedFile).subscribe({
+      this.cloudinarySubscription = this.sCloudinary.uploadImage(this.selectedFile).subscribe({
         next: (response) => {
-          this.sPost.createPost({ textContent: form.value['textContent'], picture: response }).subscribe({
+          this.createPostSubscription = this.sPost.createPost({ textContent: form.value['textContent'], picture: response }).subscribe({
             next: (post) => {
               this.postCreated.emit(post);
               form.reset();
@@ -47,7 +53,7 @@ export class CreatePostComponent {
         } 
       })
     } else if (this.selectedFile == null) {
-      this.sPost.createPost({ textContent: form.value['textContent'] }).subscribe({
+      this.createPostSubscription = this.sPost.createPost({ textContent: form.value['textContent'] }).subscribe({
         next: (post) => {
           this.postCreated.emit(post);
           form.reset();
