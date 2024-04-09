@@ -1,1 +1,30 @@
 @import url("../page-layout.css");
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.textContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.textContainer h2, .textContainer p{
+    color: #13274F;
+}
+.textContainer h2{
+    font-size: x-large;
+}
+.textContainer p{
+    font-size: large;
+    text-align: center;
+}
+.image{
+    width: 30rem;
+}
+.homeRedirect:hover{
+    cursor: pointer;
+    font-weight: 600;
+}
