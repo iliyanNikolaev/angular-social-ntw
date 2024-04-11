@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 import { User } from '../types/User';
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private authDataSubscription: Subscription = new Subscription();
   private connectUserSubscription: Subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute, private sUser: UserService, private sAuth: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private sUser: UserService, private sAuth: AuthService) { }
 
   ngOnInit(): void {
     this.initProfile();
@@ -63,6 +63,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         error: (err) => {
           alert(err.error.errors.join('\n'));
           console.error(err);
+          this.router.navigate(['/home']);
         }
       })
     });

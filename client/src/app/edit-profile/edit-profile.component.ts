@@ -54,6 +54,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
           error: (err) => {
             alert(err.error.errors.join('\n'));
             console.error(err);
+            this.router.navigate(['/home']);
           }
         });
       }

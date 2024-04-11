@@ -46,7 +46,8 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           alert(err.error.errors.join('\n'));
-          console.error(err); 
+          console.error(err);
+          this.router.navigate(['/home']); 
         }
       })
     });

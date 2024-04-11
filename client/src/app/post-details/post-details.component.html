@@ -1,21 +1,21 @@
 <div class="wrapper" appScroll>
-    <div class="container">
-        <app-spinner *ngIf="postLoading" />
-        <div class="contentContainer" *ngIf="!postLoading">
-
+    <app-spinner *ngIf="postLoading" />
+    <div class="container" *ngIf="!postLoading">
+        <div class="contentContainer">
             <div class="upper">
                 <img class="avatar" src="{{post?.owner?.profilePic}}" alt="avatar" />
                 <div class="author">
-                    <a routerLink="/profile/{{post?.owner?._id}}" class="fullName">{{post?.owner?.firstName}} {{post?.owner?.lastName}}</a>
+                    <a routerLink="/profile/{{post?.owner?._id}}" class="fullName">{{post?.owner?.firstName}}
+                        {{post?.owner?.lastName}}</a>
                     <span class="time">{{post?.createdAt! | timeAgo | async}}</span>
                 </div>
             </div>
-        
+
             <div class="lower">
                 <p class="postContent">{{post?.textContent}}</p>
-                <img class="postImg" src="{{post?.picture}}" alt="post-image" *ngIf="post?.picture"/>
+                <img class="postImg" src="{{post?.picture}}" alt="post-image" *ngIf="post?.picture" />
             </div>
-        
+
             <div class="controls">
                 <div class="details">
                     <span class="viewLikesBtn" (click)="showLikes()">{{post?.likes?.length}} likes</span>
@@ -28,7 +28,8 @@
                 <i class="fas fa-trash-alt deleteIcon" (click)="onDelete(post?._id!)">Delete</i>
             </div>
         </div>
-        <app-likes *ngIf="likesVisible" [likes]="post?.likes!"/>
-        <app-comments *ngIf="commentsVisible" [comments]="post?.comments!" [postId]="post?._id!" (removeCommentFromPostState)="removeCommentFromPostState($event)" />
+        <app-likes *ngIf="likesVisible" [likes]="post?.likes!" />
+        <app-comments *ngIf="commentsVisible" [comments]="post?.comments!" [postId]="post?._id!"
+            (removeCommentFromPostState)="removeCommentFromPostState($event)" />
     </div>
 </div>

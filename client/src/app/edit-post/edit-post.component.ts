@@ -49,12 +49,13 @@ export class EditPostComponent implements OnInit, OnDestroy {
         next: (post) => {
           this.currPost = post;
           if(post.owner._id != this.authData?._id) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           }
         },
         error: (err) => {
           alert(err.error.errors.join('\n'));
           console.error(err); 
+          this.router.navigate(['/home']);
         }
       });
     });
