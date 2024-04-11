@@ -18,8 +18,14 @@
 
             <div class="controls">
                 <div class="details">
-                    <span class="viewLikesBtn" (click)="showLikes()">{{post?.likes?.length}} likes</span>
-                    <span class="viewCommentsBtn" (click)="showComments()">{{post?.comments?.length}} comments</span>
+                    <span class="viewLikesBtn" (click)="showLikes()">{{post?.likes?.length}} likes
+                        <i class="fas fa-plus" *ngIf="!likesVisible"></i>
+                        <i class="fas fa-minus" *ngIf="likesVisible"></i>
+                    </span>
+                    <span class="viewCommentsBtn" (click)="showComments()">{{post?.comments?.length}} comments
+                        <i class="fas fa-plus" *ngIf="!commentsVisible"></i>
+                        <i class="fas fa-minus" *ngIf="commentsVisible"></i>
+                    </span>
                 </div>
             </div>
 

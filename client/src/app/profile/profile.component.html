@@ -13,6 +13,8 @@
             <div class="controls">
                 <span class="connectionsBtn connectionsDropdown" (click)="toggleConnVisible()">
                     {{user.connections.length}} connections
+                    <i class="fas fa-plus" *ngIf="!connectionsVisible"></i>
+                    <i class="fas fa-minus" *ngIf="connectionsVisible"></i>
                 </span>
                 <div class="connsContainer" *ngIf="connectionsVisible">
                     <div class="conn" *ngFor="let conn of user.connections">
