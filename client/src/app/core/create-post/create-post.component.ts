@@ -29,7 +29,8 @@ export class CreatePostComponent implements OnDestroy {
     }
     this.isLoading = true;
     if (this.selectedFile && !(this.selectedFile.type.startsWith('image'))) {
-      form.controls['image'].setErrors({ 'invalidImage': true });
+      alert('Please select a valid image file');
+      this.selectedFile = null;
       this.isLoading = false;
     } else if (this.selectedFile && this.selectedFile.type.startsWith('image')) {
       this.cloudinarySubscription = this.sCloudinary.uploadImage(this.selectedFile).subscribe({

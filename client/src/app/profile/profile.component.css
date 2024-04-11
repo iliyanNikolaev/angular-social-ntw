@@ -122,7 +122,7 @@
 .connsContainer{
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: .5rem;
 }
 .conn {
     display: flex;

@@ -6,15 +6,10 @@
       post text content cannot be a empty string
     </span>
   </div>
-  <div class="photoContainer form-group" (change)="onFileSelected($event)" accept="image/*" ngModel
+  <div name="imageInput" class="photoContainer form-group" (change)="onFileSelected($event)" accept="image/*" ngModel
     #imageInput="ngModel">
     <span class="photoSpan" *ngIf="!selectedFile">add picture</span>
     <span class="photoSpan added" *ngIf="selectedFile">added</span>
-    <div *ngIf="imageInput.touched">
-      <span *ngIf="imageInput.errors?.['invalidImage']" class="error">
-        Please select a valid image file
-      </span>
-    </div>
     <label for='file' class="addFile form-group">
       <div class="addFileBtn">
         <i class="fas fa-images addVisible"></i>
